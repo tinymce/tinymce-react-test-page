@@ -68,8 +68,8 @@
       "react-app",
       "react-app/jest"
     ],
-    "rules": {
-      "babel-preset-react-app": "off"
+    "env": {
+      "NODE_ENV": "development"
     }
   },
   "browserslist": {
