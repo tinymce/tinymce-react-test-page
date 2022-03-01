@@ -4,9 +4,94 @@
   // and delivery mechanism, including how to create new templates
   // and modify existing ones.
   var templates = {
-    project_description: "\n            <h1>Project title</h1>\n            <p>Provide an overview of the project, the desired outcome and the steps involved</p>\n            <h2>Project details</h2>\n            <table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\n                <tbody>\n                    <tr style=\"height: 22px;\">\n                        <th style=\"width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;\"><span style=\"font-size: 10pt;\">Project Manager</span></th>\n                        <td style=\"width: 50%; height: 22px;\"><span style=\"font-size: 10pt;\">Firstname Lastname</span></td>\n                    </tr>\n                    <tr style=\"height: 22px;\">\n                        <th style=\"width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;\"><span style=\"font-size: 10pt;\">Start date</span></th>\n                        <td style=\"width: 50%; height: 22px;\"><span style=\"font-size: 10pt;\">YYYY-MM-DD</span></td>\n                    </tr>\n                    <tr style=\"height: 22px;\">\n                        <th style=\"width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;\"><span style=\"font-size: 10pt;\">End date</span></th>\n                        <td style=\"width: 50%; height: 22px;\"><span style=\"font-size: 10pt;\">YYYY-MM-DD</span></td>\n                    </tr>\n                    <tr style=\"height: 22px;\">\n                        <th style=\"width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;\"><span style=\"font-size: 10pt;\">Team</span></th>\n                        <td style=\"width: 50%; height: 22px;\"><span style=\"font-size: 10pt;\">Team name</span></td>\n                    </tr>\n                </tbody>\n            </table>\n            <h2>Project content</h2>\n            <p>Continue writing your project documentations here</p>\n        ",
-    meeting_minutes: "\n            <h1>Meeting minutes</h1>\n            <table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\n                <tbody>\n                    <tr style=\"height: 22px;\">\n                        <th style=\"width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;\"><span style=\"font-size: 10pt;\">Project</span></th>\n                        <td style=\"width: 50%; height: 22px;\"><span style=\"font-size: 10pt;\">Firstname Lastname</span></td>\n                    </tr>\n                    <tr style=\"height: 22px;\">\n                        <th style=\"width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;\"><span style=\"font-size: 10pt;\">Date</span></th>\n                        <td style=\"width: 50%; height: 22px;\"><span style=\"font-size: 10pt;\">YYYY-MM-DD</span></td>\n                    </tr>\n                </tbody>\n            </table>\n            <h2>Participants</h2>\n            <ul>\n                <li>Participant 1</li>\n                <li>Participant 2</li>\n            </ul>\n            <h2>Agenda</h2>\n            <p>The following topics were discussed during the meeting</p>\n            <h3>Topic 1</h3>\n            <p>Topic description</p>\n            <h2>Action points</h2>\n            <ul>\n                <li>Action item 1</li>\n                <li>Action item 2</li>\n            </ul>\n        ",
-    replacement_value_example: "\n            <h1>Test report</h1>\n            <p><span style=\"background-color: #fbeeb8;\">The values in the table is dynamically generated using the template plugin replacement values</span></p>\n            <table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\n                <tbody>\n                    <tr style=\"height: 22px;\">\n                        <th style=\"width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;\"><span style=\"font-size: 10pt;\">Test subject</span></th>\n                        <td style=\"width: 50%; height: 22px;\"><span style=\"font-size: 10pt;\">{$username}</span></td>\n                    </tr>\n                    <tr style=\"height: 22px;\">\n                        <th style=\"width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;\"><span style=\"font-size: 10pt;\">Date</span></th>\n                        <td style=\"width: 50%; height: 22px;\"><span style=\"font-size: 10pt;\" class=\"cdate\">date</span></td>\n                    </tr>\n                    <tr style=\"height: 22px;\">\n                        <th style=\"width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;\"><span style=\"font-size: 10pt;\">ID</span></th>\n                        <td style=\"width: 50%; height: 22px;\"><span style=\"font-size: 10pt;\">{$userid}</span></td>\n                    </tr>\n                </tbody>\n            </table>\n            <h2>Test result</h2>\n            <p>Enter test results here</p>\n        ",
+    project_description: `
+      <h1>Project title</h1>
+      <p>Provide an overview of the project, the desired outcome and the steps involved</p>
+      <h2>Project details</h2>
+      <table style="border-collapse: collapse; width: 100%;" border="1">
+          <tbody>
+              <tr style="height: 22px;">
+                  <th style="width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;"><span
+                          style="font-size: 10pt;">Project Manager</span></th>
+                  <td style="width: 50%; height: 22px;"><span style="font-size: 10pt;">Firstname Lastname</span></td>
+              </tr>
+              <tr style="height: 22px;">
+                  <th style="width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;"><span
+                          style="font-size: 10pt;">Start date</span></th>
+                  <td style="width: 50%; height: 22px;"><span style="font-size: 10pt;">YYYY-MM-DD</span></td>
+              </tr>
+              <tr style="height: 22px;">
+                  <th style="width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;"><span
+                          style="font-size: 10pt;">End date</span></th>
+                  <td style="width: 50%; height: 22px;"><span style="font-size: 10pt;">YYYY-MM-DD</span></td>
+              </tr>
+              <tr style="height: 22px;">
+                  <th style="width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;"><span
+                          style="font-size: 10pt;">Team</span></th>
+                  <td style="width: 50%; height: 22px;"><span style="font-size: 10pt;">Team name</span></td>
+              </tr>
+          </tbody>
+      </table>
+      <h2>Project content</h2>
+      <p>Continue writing your project documentations here</p>
+    `,
+    meeting_minutes: `
+      <h1>Meeting minutes</h1>
+      <table style="border-collapse: collapse; width: 100%;" border="1">
+          <tbody>
+              <tr style="height: 22px;">
+                  <th style="width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;"><span
+                          style="font-size: 10pt;">Project</span></th>
+                  <td style="width: 50%; height: 22px;"><span style="font-size: 10pt;">Firstname Lastname</span></td>
+              </tr>
+              <tr style="height: 22px;">
+                  <th style="width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;"><span
+                          style="font-size: 10pt;">Date</span></th>
+                  <td style="width: 50%; height: 22px;"><span style="font-size: 10pt;">YYYY-MM-DD</span></td>
+              </tr>
+          </tbody>
+      </table>
+      <h2>Participants</h2>
+      <ul>
+          <li>Participant 1</li>
+          <li>Participant 2</li>
+      </ul>
+      <h2>Agenda</h2>
+      <p>The following topics were discussed during the meeting</p>
+      <h3>Topic 1</h3>
+      <p>Topic description</p>
+      <h2>Action points</h2>
+      <ul>
+          <li>Action item 1</li>
+          <li>Action item 2</li>
+      </ul>
+    `,
+    replacement_value_example: `
+      <h1>Test report</h1>
+      <p><span style="background-color: #fbeeb8;">The values in the table is dynamically generated using the template plugin
+              replacement values</span></p>
+      <table style="border-collapse: collapse; width: 100%;" border="1">
+          <tbody>
+              <tr style="height: 22px;">
+                  <th style="width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;"><span
+                          style="font-size: 10pt;">Test subject</span></th>
+                  <td style="width: 50%; height: 22px;"><span style="font-size: 10pt;">{$username}</span></td>
+              </tr>
+              <tr style="height: 22px;">
+                  <th style="width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;"><span
+                          style="font-size: 10pt;">Date</span></th>
+                  <td style="width: 50%; height: 22px;"><span style="font-size: 10pt;" class="cdate">date</span></td>
+              </tr>
+              <tr style="height: 22px;">
+                  <th style="width: 50%; height: 22px; text-align: left; background-color: #ecf0f1;"><span
+                          style="font-size: 10pt;">ID</span></th>
+                  <td style="width: 50%; height: 22px;"><span style="font-size: 10pt;">{$userid}</span></td>
+              </tr>
+          </tbody>
+      </table>
+      <h2>Test result</h2>
+      <p>Enter test results here</p>
+    `,
     blank_template: ""
   };
   return {
@@ -15,9 +100,9 @@
     // to make dynamic templates (though there is many ways to achieve
     // dynamic templates.).
     // Tip! To make TinyMCE leaner, only include the plugins you actually need
-    plugins: "link,lists,code,visualblocks,table,hr,image,template",
+    plugins: "link lists code visualblocks table image template",
     // Nothing special about the toolbar in this demo.
-    toolbar: "undo redo | styleselect | bold italic strikethrough backcolor | bullist numlist link image hr | code",
+    toolbar: "undo redo | styles | bold italic strikethrough backcolor | bullist numlist link image hr | code",
     // Tip! The height option accepts any valid CSS for height
     height: "calc(100vh - 4rem)",
     // The template plugin allows inserting variables inside a template which is
@@ -34,20 +119,7 @@
     // https://www.tiny.cloud/docs/plugins/template/#template_cdate_classes
     template_cdate_classes: "cdate creationdate",
     setup: function setup(editor) {
-      // This is where we define our placeholder. It can be any HTMl.
-      // The content is actually being inserted into the editor, but
-      // is filtered out on save/export to avoid it being submitted to
-      // the backend.
-      // Each button also has content editable false to make the button
-      // clickable.
-      // Please have a look at the CSS below as it's a big part of the
-      // UI as well.
-      // Notice also that we're not using any javascript inside the content
-      // to avoid XSS vulnerability issues. Instead each button is identified
-      // using an id.
-      editor.on("init", function () {
-        editor.setContent("\n                    <div id=\"placeholder\">\n                        <h1>Document Title</h1>\n                        <p>Start a new blank document or insert a template below</p>\n                        <button type=\"button\" id=\"project_description\" contenteditable=\"false\" class=\"doc\">Project Description</button>\n                        <button type=\"button\" id=\"meeting_minutes\" contenteditable=\"false\" class=\"doc\">Meeting minutes</button>\n                        <button type=\"button\" id=\"replacement_value_example\" contenteditable=\"false\" class=\"doc\">Replacements value example</button>\n                        <button type=\"button\" id=\"blank_template\" contenteditable=\"false\" class=\"new-doc\">Empty page</button>\n                        <button type=\"button\" id=\"manage_templates\" contenteditable=\"false\" class=\"manage\">Manage templates</button>\n                    </div>\n                ");
-      }); // When the editor is clicked we monitor what is being clicked and
+      // When the editor is clicked we monitor what is being clicked and
       // take appropriate actions. This is how we dedect if a insert template
       // button has been clicked. This event is triggered for every click inside
       // TinyMCE.
@@ -134,6 +206,62 @@
     // content_css option to load a separate CSS file. Makes editing easier too.
     // https://www.tiny.cloud/docs/configure/content-appearance/#content_style
     // https://www.tiny.cloud/docs/configure/content-appearance/#content_css
-    content_style: "\n            body {\n                max-width: 720px;\n                margin: 2rem auto;\n            }\n\n            #placeholder {\n                color: #aaa;\n                display: flex;\n                flex-direction: column;\n                min-height: calc(100vh - 4rem);\n                -webkit-user-select: none; /* Prevent any selections on the element */\n                user-select: none;\n            }\n\n            #placeholder * {\n                -webkit-user-select: none; /* Prevent any selections on the element */\n                user-select: none;\n            }\n\n            #placeholder h1 {\n                margin: 0;\n            }\n\n            #placeholder button {\n                -webkit-appearance: none;\n                background: url('images/template-icon-document.png') .25rem center no-repeat transparent;\n                background-size: 20px 20px;\n                border-radius: .25rem;\n                border: none;\n                color: #aaa;\n                cursor: default;\n                display: block;\n                font-family: inherit;\n                font-size: 1rem;\n                margin: .15rem -.25rem;\n                outline: none;\n                padding: .35rem .35rem .35rem calc(.5rem + 20px);\n                text-align: left;\n                transition: background-color .2s;\n            }\n\n            #placeholder button:hover {\n                background-color: #f4f4f4;\n            }\n\n            #placeholder button.new-doc {\n                background-image: url('images/template-icon-new-document.png');\n            }\n\n            #placeholder button.manage {\n                background-image: url('images/template-icon-manage.png');\n            }\n        "
+    content_style: `
+      body {
+        max-width: 720px;
+        margin: 2rem auto;
+      }
+
+      #placeholder {
+        color: #aaa;
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 4rem);
+        -webkit-user-select: none;
+        /* Prevent any selections on the element */
+        user-select: none;
+      }
+
+      #placeholder * {
+        -webkit-user-select: none;
+        /* Prevent any selections on the element */
+        user-select: none;
+      }
+
+      #placeholder h1 {
+        margin: 0;
+      }
+
+      #placeholder button {
+        -webkit-appearance: none;
+        background: url('images/template-icon-document.png') .25rem center no-repeat transparent;
+        background-size: 20px 20px;
+        border-radius: .25rem;
+        border: none;
+        color: #aaa;
+        cursor: default;
+        display: block;
+        font-family: inherit;
+        font-size: 1rem;
+        margin: .15rem -.25rem;
+        outline: none;
+        padding: .35rem .35rem .35rem calc(.5rem + 20px);
+        text-align: left;
+        transition: background-color .2s;
+        cursor: pointer;
+      }
+
+      #placeholder button:hover {
+        background-color: #f4f4f4;
+      }
+
+      #placeholder button.new-doc {
+        background-image: url('images/template-icon-new-document.png');
+      }
+
+      #placeholder button.manage {
+        background-image: url('images/template-icon-manage.png');
+      }
+    `
   };
 })();

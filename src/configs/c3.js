@@ -1,12 +1,12 @@
 (function () {
   return {
-    plugins: "quickbars,advlist,autolink,lists,link,image,imagetools,charmap,preview,anchor,searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,help",
+    plugins: "quickbars advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help",
     toolbar:
-      "insertfile undo redo | styleselect | bold italic |permanentpen| alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
+      "insertfile undo redo | styles | bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
     quickbars_insert_toolbar:
-      "quicktable quickimage quicklink styleselect ",
+      "quicktable quickimage quicklink styles ",
     quickbars_selection_toolbar:
-      "bold italic | h2 h3 | blockquote | code| forecolor backcolor| quicktable quickimage | styleselect ",
+      "bold italic | h2 h3 | blockquote | code| forecolor backcolor | quicktable quickimage | styles ",
     setup: function (editor) {
       editor.ui.registry.addContextToolbar("imagealignment", {
         predicate: function (node) {
@@ -32,11 +32,11 @@
         "quickbars casechange lists advlist anchor code codesample preview table textpattern help",
       ],
       toolbar:
-        " casechange bold italic underline strikethrough | formatpainter numlist bullist |h1 h2 h3 | table preview code codesample help",
+        " casechange bold italic underline strikethrough | formatpainter numlist bullist | h1 h2 h3 | table preview code codesample help",
       quickbars_insert_toolbar:
-        "quicktable quickimage quicklink styleselect ",
+        "quicktable quickimage quicklink styles ",
       quickbars_selection_toolbar:
-        "bold italic | forecolor backcolor| quicktable quickimage | styleselect ",
+        "bold italic | forecolor backcolor | quicktable quickimage | styles ",
     },
   };
 })();

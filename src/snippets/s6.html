@@ -1,1 +1,23 @@
- 
+<!--
+  This is where we define our placeholder. It can be any HTMl.
+  The content is actually being inserted into the editor, but
+  is filtered out on save/export to avoid it being submitted to
+  the backend.
+  Each button also has content editable false to make the button
+  clickable.
+  Please have a look at the CSS below as it's a big part of the
+  UI as well.
+  Notice also that we're not using any javascript inside the content
+  to avoid XSS vulnerability issues. Instead each button is identified
+  using an id.
+-->
+<div id="placeholder">
+  <h1>Document Title</h1>
+  <p>Start a new blank document or insert a template below</p>
+  <button type="button" id="project_description" contenteditable="false" class="doc">Project Description</button>
+  <button type="button" id="meeting_minutes" contenteditable="false" class="doc">Meeting minutes</button>
+  <button type="button" id="replacement_value_example" contenteditable="false" class="doc">Replacements value
+    example</button>
+  <button type="button" id="blank_template" contenteditable="false" class="new-doc">Empty page</button>
+  <button type="button" id="manage_templates" contenteditable="false" class="manage">Manage templates</button>
+</div>

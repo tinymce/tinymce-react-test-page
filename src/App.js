@@ -6,66 +6,86 @@ import c3 from './configs/c3.js';
 import c4 from './configs/c4.js';
 import c5 from './configs/c5.js';
 import c6 from './configs/c6.js';
-import s1 from './snippets/s1.html';
-import s2 from './snippets/s2.html';
-import s3 from './snippets/s3.html';
-import s4 from './snippets/s4.html';
+import basic from './snippets/basic.html';
 import s5 from './snippets/s5.html';
 import s6 from './snippets/s6.html';
 
-const presets = [
-  {
-    title: 'Classic Editor',
-    config: c1,
-    snippet: s1,
-  },
-  {
-    title: 'Inline Editor',
-    config: c2,
-    snippet: s2,
-  },
-  {
-    title: 'Classic Editor - Quickbars on classic and mobile',
-    config: c3,
-    snippet: s3,
-  },
-  {
-    title: 'Classic Editor - with toolbar bottom , quick bars and no mobile setup',
-    config: c4,
-    snippet: s4,
-  },
-  {
-    title: 'Classic Editor - with random content and autoresize on',
-    config: c5,
-    snippet: s5,
-  },
-  {
-    title: 'Place Holder Demo',
-    config: c6,
-    snippet: s6
-  }
-];
+const configWrapRe = /^\s*\(\s*function\s*\(\s*\)\s*\{\s*return\s*([\s\S]*);\s*\}\s*\)\s*\(\s*\)\s*;\s*$/;
 
-const apiKey = 'qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc';
-const cloudChannel = '6-dev';
+/**
+ * Escape text to make HTML.
+ * @param {string} text text to escape as HTML.
+ * @returns the text with special characters escaped.
+ */
+const escapeHtml = (text) => {
+  return text.replaceAll(/&/g, '&amp;').replaceAll(/</g, '&lt;').replaceAll(/>/g, '&gt;').replaceAll(/"/g, '&quot;').replaceAll(/'/g, '&#39;');
+}
+
+/**
+ * Unwraps a config.
+ * @param {string} config a config with a function wrapping it to make it easy to eval.
+ * @returns {string} the unwrapped config.
+ */
+const unwrapConfig = (config) => {
+  const m = configWrapRe.exec(config);
+  return m !== null ? m[1] : config;
+}
+
+/**
+ * Process a snippet and insert the contained variables.
+ * @param {string} snippet the HTML snippet with possible comment variables.
+ * @param {string} title the title.
+ * @param {string} config the config.
+ * @returns {string} the snippet with variables inserted.
+ */
+const replaceSnippetVars = (snippet, title, config) => {
+  return snippet.replaceAll(/<!--\{([a-zA-Z0-9]+)\}-->/g, function (match, name) {
+    if (name === 'title') {
+      return escapeHtml(title);
+    } else if (name === 'init') {
+      return `&lt;Editor init={${escapeHtml(unwrapConfig(config))}}\n/&gt;`;
+    } else {
+      console.warn('Unknown variable', match);
+      return match;
+    }
+  });
+};
+
+const params = new URLSearchParams(window.location.search);
+
+const cloudChannel = params.get("cloud-channel") ?? '6-dev';
+
+const apiKey = params.get("api-key") ?? 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ayxi5ao43ha';
+
+function TinyEd({ title, config, snippet, ...other }) {
+  const [init, setInit] = useState(null);
+  const [initialValue, setInitialValue] = useState("");
+  useEffect(() => {
+    setInit(eval(config));
+    setInitialValue(replaceSnippetVars(snippet, title, config));
+  }, [title, config, snippet]);
+
+  return (
+    <div>
+      <h1>{title}</h1>
+      {init && <Editor apiKey={apiKey} cloudChannel={cloudChannel} init={init} initialValue={initialValue} {...other} />}
+      <br />
+      <br />
+    </div>
+  );
+}
 
 function App() {
-  const [initConfigs, setInitConfigs] = useState([]);
-  useEffect(() => {
-    setInitConfigs(presets.map((preset) => ({ ...preset, init: eval(preset.config) })));
-  }, []);
   return (
     <div className="App">
-      {
-        initConfigs.map((item) => (
-        <div key={item.title}>
-        <h1>{item.title}</h1>
-        <Editor apiKey={apiKey} cloudChannel={cloudChannel} init={item.init} initialValue={item.snippet} />
-        <br />
-        <br />
-        </div>
-        ))
-      }
+      <h1>Showing cloud channel {cloudChannel}</h1>
+      <p>View: <a href="/?cloud-channel=6-dev">6-dev</a>, <a href="/?cloud-channel=6-testing">6-testing</a>, <a href="/?cloud-channel=6-stable">6-stable</a></p>
+      <TinyEd config={c1} snippet={basic} title='Classic Editor' />
+      <TinyEd config={c2} snippet={basic} title='Inline Editor' />
+      <TinyEd config={c3} snippet={basic} title='Classic Editor - Quickbars on classic and mobile' />
+      <TinyEd config={c4} snippet={basic} title='Classic Editor - with toolbar bottom , quick bars and no mobile setup' />
+      <TinyEd config={c5} snippet={s5} title='Classic Editor - with random content and autoresize on' />
+      <TinyEd config={c6} snippet={s6} title='Place Holder Demo' />
     </div>
   );
 }
