@@ -3,7 +3,7 @@
     plugins: "advlist,autolink,lists,link,image,charmap,preview,anchor,searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,help,wordcount",
     height: 600,
     toolbar:
-      "insertfile undo redo | styleselect | bold italic | wordcount| alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
+      "insertfile undo redo | styles | bold italic | wordcount| alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
     mobile: {
       theme: "silver",
       plugins: [
