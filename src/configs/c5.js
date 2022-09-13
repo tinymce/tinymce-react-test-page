@@ -4,10 +4,64 @@
       "advtable", "autoresize", "anchor", "advlist", "autolink", "autosave", "charmap", "advcode", "codesample", "directionality", "emoticons", "fullscreen",
       "help", "image", "insertdatetime", "importcss", "link", "lists", "media", "nonbreaking", "pagebreak", "preview", "save", "searchreplace", "table",
       "template", "visualblocks", "visualchars", "wordcount", "casechange", "checklist", "powerpaste", "a11ychecker", "tinymcespellchecker", "tinydrive",
-      "tableofcontents", "editimage", "mentions", "mediaembed", "permanentpen", "formatpainter", "pageembed", "linkchecker", "tinycomments", "export"
+      "tableofcontents", "editimage", "mentions", "mediaembed", "permanentpen", "formatpainter", "pageembed", "linkchecker", "tinycomments", "export",
+      "autocorrect", "footnotes", "mergetags"
     ],
     // The toolbar_mode option will no-longer accept the false value in TinyMCE 6.0, which was retained for backwards compatibility with the toolbar_drawer option. Use 'wrap' instead to keep the same functionality as false.
     // toolbar_mode : Default Value: 'floating' / Possible Values: 'floating', 'sliding', 'scrolling', or 'wrap'
+    mergetags_prefix: '${',
+    mergetags_suffix: '}',
+    mergetags_list: [
+      {
+        value: 'Current.Date',
+        title: 'Current date in DD/MM/YYYY format'
+      },
+      {
+        value: 'Campaign.Toc',
+        title: 'Linked table of contents in your campaign'
+      },
+      {
+        title: 'Phone',
+        menu: [
+          {
+            value: 'Phone.Home'
+          },
+          {
+            value: 'Phone.work'
+          }
+        ]
+      },
+      {
+        title: 'Person',
+        menu: [
+          {
+            value: 'Person.Name'
+          },
+          {
+            value: 'Person.Name.First'
+          },
+          {
+            value: 'Person.Name.Last'
+          },
+          {
+            value: 'Person.Name.Full'
+          },
+          {
+            title: 'Email',
+            menu: [
+              {
+                value: 'Person.Email.Work'
+              },
+              {
+                value: 'Person.Email.Home'
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    autocorrect_autocorrect: true,
+    autocorrect_capitalize: true,
     toolbar_mode: 'sliding',
     toolbar_sticky: true,
     toolbar_location: 'top', //top, bottom
@@ -20,7 +74,7 @@
     quickbars_selection_toolbar: 'bold italic | h2 h3 | blockquote | code| forecolor backcolor | quicktable quickimage | formatpainter pageembed permanentpen styles ',
     toolbar: "bold italic underline strikethrough subscript superscript | fontfamily fontsize | numlist bullist checklist | permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 |" +
       "copy cut paste pastetext selectall remove newdocument wordcount searchreplace | undo redo | save cancel restoredraft | fullscreen print preview export code help | template insertdatetime codesample emoticons charmap | anchor link unlink image media pageembed insertfile | visualblocks visualchars a11ycheck | spellchecker language spellcheckdialog | tableofcontents tableofcontentsupdate | " +
-      "table advtablerownumbering tableclass tablecellclass tablecellvalign tablecellborderwidth tablecellborderstyle tablecaption tablecellbackgroundcolor tablecellbordercolor tablerowheader tablecolheader",
+      "table advtablerownumbering tableclass tablecellclass tablecellvalign tablecellborderwidth tablecellborderstyle tablecaption tablecellbackgroundcolor tablecellbordercolor tablerowheader tablecolheader footnotes footnotesupdate",
     menubar: 'file edit insert view format table tools help',
     mobile: {
       theme: "silver",
