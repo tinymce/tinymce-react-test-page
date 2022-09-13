@@ -57,7 +57,7 @@ const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.sub
 
 const cloudChannel = params.get("cloud-channel") ?? '6-dev';
 
-const apiKey = params.get("api-key") ?? 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ayxi5ao43ha';
+const apiKey = params.get("api-key") ?? 'b1g4d59rwwqxx1vj7mci23rjj8ubgb46i4xsio6ieig6fkps';
 
 function TinyEd({ title, config, snippet, ...other }) {
   const [init, setInit] = useState(null);
