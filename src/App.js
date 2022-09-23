@@ -53,9 +53,11 @@ const replaceSnippetVars = (snippet, title, config) => {
 
 const params = new URLSearchParams(window.location.search);
 
+const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.substring(0, window.location.href.indexOf('?')) : window.location.href;
+
 const cloudChannel = params.get("cloud-channel") ?? '6-dev';
 
-const apiKey = params.get("api-key") ?? 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ayxi5ao43ha';
+const apiKey = params.get("api-key") ?? 'b1g4d59rwwqxx1vj7mci23rjj8ubgb46i4xsio6ieig6fkps';
 
 function TinyEd({ title, config, snippet, ...other }) {
   const [init, setInit] = useState(null);
@@ -79,7 +81,7 @@ function App() {
   return (
     <div className="App">
       <h1>Showing cloud channel {cloudChannel}</h1>
-      <p>View: <a href="/?cloud-channel=6-dev">6-dev</a>, <a href="/?cloud-channel=6-testing">6-testing</a>, <a href="/?cloud-channel=6-stable">6-stable</a></p>
+      <p>View: <a href={baseUrl + "?cloud-channel=6-dev"}>6-dev</a>, <a href={baseUrl + "?cloud-channel=6-testing"}>6-testing</a>, <a href={baseUrl + "?cloud-channel=6-stable"}>6-stable</a></p>
       <TinyEd config={c1} snippet={basic} title='Classic Editor' />
       <TinyEd config={c2} snippet={basic} title='Inline Editor' />
       <TinyEd config={c3} snippet={basic} title='Classic Editor - Quickbars on classic and mobile' />
