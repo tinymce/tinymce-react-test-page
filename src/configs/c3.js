@@ -1,8 +1,8 @@
 (function () {
   return {
-    plugins: "quickbars advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help",
+    plugins: "typography inlinecss quickbars advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help",
     toolbar:
-      "insertfile undo redo | styles | bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
+      "typography insertfile undo redo | styles | bold italic | permanentpen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table help",
     quickbars_insert_toolbar:
       "quicktable quickimage quicklink styles ",
     quickbars_selection_toolbar:
