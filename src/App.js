@@ -82,6 +82,7 @@ function App() {
     <div className="App">
       <h1>Showing cloud channel {cloudChannel}</h1>
       <p>View: <a href={baseUrl + "?cloud-channel=6-dev"}>6-dev</a>, <a href={baseUrl + "?cloud-channel=6-testing"}>6-testing</a>, <a href={baseUrl + "?cloud-channel=6-stable"}>6-stable</a></p>
+      <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
       <TinyEd config={c1} snippet={basic} title='Classic Editor' />
       <TinyEd config={c2} snippet={basic} title='Inline Editor' />
       <TinyEd config={c3} snippet={basic} title='Classic Editor - Quickbars on classic and mobile' />

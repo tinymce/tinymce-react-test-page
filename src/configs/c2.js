@@ -152,8 +152,6 @@
 	const basicConfig = {
 	  ai_request,
 	  height: 600,
-	  mergetags_prefix: '\${',
-	  mergetags_suffix: '}',
 	  autocorrect_autocorrect: true,
 	  autocorrect_capitalize: true,
 	  advcode_inline: true,
@@ -170,6 +168,8 @@
 	  basicConfig,
 	  plugins: basicPlugin,
 	  toolbar: basicToolbar,
+	  mergetags_prefix: '${',
+	  mergetags_suffix: '}',
 	  mergetags_list,
 	  advtemplate_templates,
 	  ai_request,
