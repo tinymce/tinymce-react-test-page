@@ -184,6 +184,8 @@
       username: "Jack Black",
       userid: "991234-22"
     },
+    pad_empty_with_br: true,
+    help_accessibility: true,
     // A simple way to get dates into the templates is using the creation date feature
     // of the template plugin.
     // https://www.tiny.cloud/docs/plugins/template/#template_cdate_classes
