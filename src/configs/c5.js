@@ -159,6 +159,8 @@
 		theme: "silver",
 		contextmenu: "link image table preview",
 	  },
+		pad_empty_with_br: true,
+		help_accessibility: true,
 	};
 	const advancePlugins = ["accordion", "ai", "advtable", "autoresize", "anchor", "advlist", "autolink", "autosave", "charmap", "advcode", "codesample", "directionality", "emoticons", "fullscreen",
 	  "help", "image", "insertdatetime", "importcss", "link", "lists", "media", "nonbreaking", "pagebreak", "preview", "save", "searchreplace", "table",
