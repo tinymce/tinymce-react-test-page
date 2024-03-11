@@ -70,7 +70,7 @@
     }
   ];
 
-  var templates = {
+  const templates = {
     project_description: `
       <h1>Project title</h1>
       <p>Provide an overview of the project, the desired outcome and the steps involved</p>

@@ -1,5 +1,5 @@
 import { Editor } from '@tinymce/tinymce-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import c1 from './configs/c1.js';
 import c2 from './configs/c2.js';
 import c3 from './configs/c3.js';
@@ -59,7 +59,7 @@ const cloudChannel = params.get("cloud-channel") ?? '6-dev';
 
 const apiKey = params.get("api-key") ?? 'b1g4d59rwwqxx1vj7mci23rjj8ubgb46i4xsio6ieig6fkps';
 
-function TinyEd({ title, config, snippet, ...other }) {
+const TinyEd = ({ title, config, snippet, ...other }) => {
   const [init, setInit] = useState(null);
   const [initialValue, setInitialValue] = useState("");
   useEffect(() => {
@@ -75,14 +75,47 @@ function TinyEd({ title, config, snippet, ...other }) {
       <br />
     </div>
   );
-}
+};
 
 function App() {
+  const editorRef = useRef(null);
+  const showMarkGetContent = async () => {
+    if (editorRef.current) {
+      const editor = editorRef.current;
+      const content = editor.getContent(); 
+      
+      if (editor.ui) {
+        editor.windowManager.open({
+          size: 'large',
+          title: 'Get Markdown Content',
+          body: {
+            type: 'panel',
+            items: [
+              {
+                type: 'textarea',
+                flex: true,
+                name: 'getmarkcontent',
+                label: 'Content',
+              },
+            ],
+          },
+          buttons: [],
+          initialData: {
+            getmarkcontent: content,
+          },
+        });
+      } else {
+        editor.windowManager.alert(content);
+      }
+    }
+  };
   return (
     <div className="App">
       <h1>Showing cloud channel {cloudChannel}</h1>
       <p>View: <a href={baseUrl + "?cloud-channel=6-dev"}>6-dev</a>, <a href={baseUrl + "?cloud-channel=6-testing"}>6-testing</a>, <a href={baseUrl + "?cloud-channel=6-stable"}>6-stable</a></p>
+      <p>View: <a href={baseUrl + "?cloud-channel=7-dev"}>7-dev</a>, <a href={baseUrl + "?cloud-channel=7-testing"}>7-testing</a>, <a href={baseUrl + "?cloud-channel=7-stable"}>7-stable</a></p>
       <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
+      <button type="button" class="showMarkGetContent" onClick={showMarkGetContent}>Show MarkDown Content</button>
       <TinyEd config={c1} snippet={basic} title='Classic Editor' />
       <TinyEd config={c2} snippet={basic} title='Inline Editor' />
       <TinyEd config={c3} snippet={basic} title='Classic Editor - Quickbars on classic and mobile' />
