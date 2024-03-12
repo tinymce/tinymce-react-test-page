@@ -55,7 +55,7 @@ const params = new URLSearchParams(window.location.search);
 
 const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.substring(0, window.location.href.indexOf('?')) : window.location.href;
 
-const cloudChannel = params.get("cloud-channel") ?? '6-dev';
+const cloudChannel = params.get("cloud-channel") ?? '7-dev';
 
 const apiKey = params.get("api-key") ?? 'b1g4d59rwwqxx1vj7mci23rjj8ubgb46i4xsio6ieig6fkps';
 
