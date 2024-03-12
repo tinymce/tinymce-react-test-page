@@ -149,6 +149,34 @@
 	  }
 	};
 
+	const revisions = [
+		{
+			"revisionId": "1",
+			"createdAt": "2023-11-25T03:30:46.171Z",
+			"content": "<h2>Rev 1</h2>"
+		},
+		{
+			"revisionId": "2",
+			"createdAt": "2023-11-25T12:06:09.675Z",
+			"content": "<h2>Rev 2</h2>"
+		},
+		{
+			"revisionId": "3",
+			"createdAt": "2023-11-27T03:23:32.351Z",
+			"content": "<h2>Rev 3</h2>"
+		},
+		{
+			"revisionId": "4",
+			"createdAt": "2023-11-29T12:35:16.203Z",
+			"content": "<h2>Rev 4</h2>"
+		},
+		{
+			"revisionId": "5",
+			"createdAt": "2023-11-28T08:01:56.100Z",
+			"content": "<h2>Rev 5</h2>"
+		}
+	];
+
 	const basicConfig = {
 	  ai_request,
 	  height: 600,
@@ -166,9 +194,9 @@
 	  "help", "image", "insertdatetime", "importcss", "link", "lists", "media", "nonbreaking", "pagebreak", "preview", "save", "searchreplace", "table",
 	  "advtemplate", "visualblocks", "visualchars", "wordcount", "casechange", "checklist", "powerpaste", "a11ychecker", "tinymcespellchecker", "tinydrive",
 	  "tableofcontents", "editimage", "mentions", "mediaembed", "permanentpen", "formatpainter", "pageembed", "linkchecker", "tinycomments", "export",
-	  "autocorrect", "mergetags", "footnotes", "typography", "inlinecss"];
+	  "autocorrect", "mergetags", "footnotes", "typography", "inlinecss", "revisionhistory", "exportpdf", "exportword", "importword", "markdown"];
 
-	const advanceToolbar = "aidialog aishortcuts bold italic underline strikethrough subscript superscript addtemplate inserttemplate accordion | fontfamily fontsize fontsizeinput | numlist bullist checklist | permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 |" +
+	const advanceToolbar = "aidialog aishortcuts bold italic underline strikethrough subscript superscript addtemplate inserttemplate accordion | fontfamily fontsize fontsizeinput | revisionhistory exportpdf exportword importword | numlist bullist checklist | permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 |" +
 	  "copy cut paste pastetext selectall remove newdocument wordcount searchreplace | undo redo | save cancel restoredraft | fullscreen print preview export code help | template insertdatetime codesample emoticons charmap | anchor link unlink image media pageembed insertfile | visualblocks visualchars a11ycheck | spellchecker language spellcheckdialog | tableofcontents tableofcontentsupdate | " +
 	  "table advtablerownumbering tableclass tablecellclass tablecellvalign tablecellborderwidth tablecellborderstyle tablecaption tablecellbackgroundcolor tablecellbordercolor tablerowheader tablecolheader";
 
@@ -192,13 +220,17 @@
 	  menubar: 'file edit insert view format table footnotes footnotesupdate | tools help',
 	  advcode_inline: true,
 	  advtemplate_templates: advtemplate_templates,
+		revisionhistory_fetch: () => Promise.resolve(revisions),
+		exportpdf_service_url: "https://exportpdf.converter.tiny.cloud/v1/convert",
+		exportword_service_url: "https://exportdocx.converter.tiny.cloud/v1/convert",
+		importword_service_url: "https://importdocx.converter.tiny.cloud/v2/convert/docx-html",
 	  mobile: {
 		theme: "silver",
 		plugins: [
-		  "casechange link image lists advlist anchor code codesample preview table textpattern help autoresize wordcount",
+		  "casechange link image lists advlist anchor code codesample preview table textpattern help autoresize wordcount revisionhistory exportpdf exportword importword",
 		],
 		toolbar:
-		  " casechange bold italic underline strikethrough | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help",
+		  " casechange bold italic underline strikethrough | revisionhistory exportpdf exportword importword | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help",
 		contextmenu: "link image table preview",
 	  },
 	};

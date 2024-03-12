@@ -149,6 +149,34 @@
 	  }
 	};
 
+	const revisions = [
+		{
+			"revisionId": "1",
+			"createdAt": "2023-11-25T03:30:46.171Z",
+			"content": "<h2>Rev 1</h2>"
+		},
+		{
+			"revisionId": "2",
+			"createdAt": "2023-11-25T12:06:09.675Z",
+			"content": "<h2>Rev 2</h2>"
+		},
+		{
+			"revisionId": "3",
+			"createdAt": "2023-11-27T03:23:32.351Z",
+			"content": "<h2>Rev 3</h2>"
+		},
+		{
+			"revisionId": "4",
+			"createdAt": "2023-11-29T12:35:16.203Z",
+			"content": "<h2>Rev 4</h2>"
+		},
+		{
+			"revisionId": "5",
+			"createdAt": "2023-11-28T08:01:56.100Z",
+			"content": "<h2>Rev 5</h2>"
+		}
+	];
+
 	const basicConfig = {
 	  ai_request,
 	  height: 600,
@@ -162,9 +190,9 @@
 		pad_empty_with_br: true,
 		help_accessibility: true,
 	};
-	const basicPlugin = "accordion ai advlist advtemplate autolink autocorrect mergetags footnotes lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount typography inlinecss"
+	const basicPlugin = "accordion ai advlist advtemplate autolink autocorrect mergetags footnotes lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount typography inlinecss revisionhistor exportpdf exportword importword markdown";
 
-	const basicToolbar = "aidialog aishortcuts accordion bold italic underline strikethrough casechange | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help"
+	const basicToolbar = "aidialog aishortcuts accordion bold italic underline strikethrough casechange | revisionhistory exportpdf exportword importword | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help";
 
 	const quickBar = {
 	  quickbars_insert_toolbar:
@@ -183,6 +211,11 @@
 	  advtemplate_templates,
 	  quickBar,
 	  ai_request,
+		revisionhistory_fetch: () => Promise.resolve(revisions),
+		exportpdf_service_url: "https://exportpdf.converter.tiny.cloud/v1/convert",
+		exportword_service_url: "https://exportdocx.converter.tiny.cloud/v1/convert",
+		importword_service_url: "https://importdocx.converter.tiny.cloud/v2/convert/docx-html",
+	
 	  setup: function (editor) {
 		editor.ui.registry.addContextToolbar("imagealignment", {
 		  predicate: function (node) {

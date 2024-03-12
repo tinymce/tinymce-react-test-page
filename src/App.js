@@ -59,7 +59,7 @@ const cloudChannel = params.get("cloud-channel") ?? '6-dev';
 
 const apiKey = params.get("api-key") ?? 'b1g4d59rwwqxx1vj7mci23rjj8ubgb46i4xsio6ieig6fkps';
 
-function TinyEd({ title, config, snippet, ...other }) {
+const TinyEd = ({ title, config, snippet, ...other }) => {
   const [init, setInit] = useState(null);
   const [initialValue, setInitialValue] = useState("");
   useEffect(() => {
@@ -75,13 +75,14 @@ function TinyEd({ title, config, snippet, ...other }) {
       <br />
     </div>
   );
-}
+};
 
 function App() {
   return (
     <div className="App">
       <h1>Showing cloud channel {cloudChannel}</h1>
       <p>View: <a href={baseUrl + "?cloud-channel=6-dev"}>6-dev</a>, <a href={baseUrl + "?cloud-channel=6-testing"}>6-testing</a>, <a href={baseUrl + "?cloud-channel=6-stable"}>6-stable</a></p>
+      <p>View: <a href={baseUrl + "?cloud-channel=7-dev"}>7-dev</a>, <a href={baseUrl + "?cloud-channel=7-testing"}>7-testing</a>, <a href={baseUrl + "?cloud-channel=7-stable"}>7-stable</a></p>
       <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
       <TinyEd config={c1} snippet={basic} title='Classic Editor' />
       <TinyEd config={c2} snippet={basic} title='Inline Editor' />
