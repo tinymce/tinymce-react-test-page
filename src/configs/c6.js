@@ -163,33 +163,17 @@
   };
   return {
     selector: "textarea.t6",
-    // The template plugin is needed to use the replace values feature
-    // to make dynamic templates (though there is many ways to achieve
-    // dynamic templates.).
-    // Tip! To make TinyMCE leaner, only include the plugins you actually need
     plugins: "link lists code visualblocks table image advtemplate",
     // Nothing special about the toolbar in this demo.
     toolbar: "undo redo addtemplate inserttemplate | styles fontsizeinput | bold italic strikethrough backcolor | bullist numlist link image hr | code",
     // Tip! The height option accepts any valid CSS for height
     height: "calc(100vh - 4rem)",
-    // The template plugin allows inserting variables inside a template which is
-    // then replaced with these values upon insertion. This is one way to
-    // achieve dynamic templates. Another way would be to generate the whole template
-    // dynamically upon request in case the template_replace_values can be removed.
-    // https://www.tiny.cloud/docs/plugins/template/#template_replace_values
+
     advcode_inline: true,
     advtemplate_templates,
-
-    template_replace_values: {
-      username: "Jack Black",
-      userid: "991234-22"
-    },
     pad_empty_with_br: true,
     help_accessibility: true,
-    // A simple way to get dates into the templates is using the creation date feature
-    // of the template plugin.
-    // https://www.tiny.cloud/docs/plugins/template/#template_cdate_classes
-    template_cdate_classes: "cdate creationdate",
+
     setup: function setup(editor) {
       // When the editor is clicked we monitor what is being clicked and
       // take appropriate actions. This is how we dedect if a insert template
