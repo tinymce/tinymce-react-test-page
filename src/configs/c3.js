@@ -190,7 +190,7 @@
 		pad_empty_with_br: true,
 		help_accessibility: true,
 	};
-	const basicPlugin = "accordion ai advlist advtemplate autolink autocorrect mergetags footnotes lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount typography inlinecss revisionhistor exportpdf exportword importword markdown";
+	const basicPlugin = "accordion ai advlist advtemplate autolink autocorrect mergetags footnotes lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount typography inlinecss revisionhistory exportpdf exportword importword markdown";
 
 	const basicToolbar = "aidialog aishortcuts accordion bold italic underline strikethrough casechange | revisionhistory exportpdf exportword importword | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help";
 
