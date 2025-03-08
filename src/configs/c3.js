@@ -227,7 +227,7 @@
 		});
 
 		editor.ui.registry.addContextToolbar("textselection1", {
-		  predicate: function (node) {
+		  predicate: function () {
 			return !editor.selection.isCollapsed();
 		  },
 		  items: "blockquote | bold italic | removeformat",

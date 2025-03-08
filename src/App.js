@@ -1,3 +1,4 @@
+import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useState, useEffect } from 'react';
 import c1 from './configs/c1.js';
