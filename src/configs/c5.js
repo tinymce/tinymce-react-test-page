@@ -219,7 +219,6 @@
 	  tinycomments_author_name: 'SuperCoolQA',
 	  menubar: 'file edit insert view format table footnotes footnotesupdate | tools help',
 	  advcode_inline: true,
-	  advtemplate_templates: advtemplate_templates,
 		revisionhistory_fetch: () => Promise.resolve(revisions),
 		exportpdf_service_url: "https://exportpdf.converter.tiny.cloud/v1/convert",
 		exportword_service_url: "https://exportdocx.converter.tiny.cloud/v1/convert",
