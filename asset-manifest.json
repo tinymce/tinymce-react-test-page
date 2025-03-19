@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tinymce-react-test-page/static/css/main.fd7f2d71.css",
-    "main.js": "/tinymce-react-test-page/static/js/main.9d5996c6.js",
+    "main.js": "/tinymce-react-test-page/static/js/main.8b0641d7.js",
     "static/js/662.ad503147.chunk.js": "/tinymce-react-test-page/static/js/662.ad503147.chunk.js",
     "index.html": "/tinymce-react-test-page/index.html",
     "main.fd7f2d71.css.map": "/tinymce-react-test-page/static/css/main.fd7f2d71.css.map",
-    "main.9d5996c6.js.map": "/tinymce-react-test-page/static/js/main.9d5996c6.js.map",
+    "main.8b0641d7.js.map": "/tinymce-react-test-page/static/js/main.8b0641d7.js.map",
     "662.ad503147.chunk.js.map": "/tinymce-react-test-page/static/js/662.ad503147.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fd7f2d71.css",
-    "static/js/main.9d5996c6.js"
+    "static/js/main.8b0641d7.js"
   ]
 }
