@@ -187,12 +187,12 @@
 			contextmenu: "link image table preview",
 		},
 		pad_empty_with_br: true,
-		help_accessibility: true,
+		help_accessibility: true
 	};
 
-	const basicPlugin = "accordion ai advlist advtemplate autolink autocorrect mergetags footnotes lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount typography inlinecss revisionhistory exportpdf exportword importword markdown";
+	const basicPlugin = "accordion ai advlist advtemplate autolink autocorrect mergetags footnotes lists link charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount typography inlinecss revisionhistory exportpdf exportword importword markdown uploadcare";
 
-	const basicToolbar = "aidialog aishortcuts accordion bold italic underline strikethrough casechange | revisionhistory exportpdf exportword importword | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help";
+	const basicToolbar = "uploadcare aidialog aishortcuts accordion bold italic underline strikethrough casechange | revisionhistory exportpdf exportword importword | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help";
 
 	return {
 		basicConfig,
@@ -207,6 +207,7 @@
 		exportpdf_service_url: "https://exportpdf.converter.tiny.cloud/v1/convert",
 		exportword_service_url: "https://exportdocx.converter.tiny.cloud/v1/convert",
 		importword_service_url: "https://importdocx.converter.tiny.cloud/v2/convert/docx-html",
+    uploadcare_public_key: '6ff5776be9bb64e10023'
 	};
 }
 )();

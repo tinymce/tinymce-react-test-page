@@ -225,11 +225,6 @@
 		importword_service_url: "https://importdocx.converter.tiny.cloud/v2/convert/docx-html",
 	  mobile: {
 		theme: "silver",
-		plugins: [
-		  "casechange link image lists advlist anchor code codesample preview table textpattern help autoresize wordcount revisionhistory exportpdf exportword importword",
-		],
-		toolbar:
-		  " casechange bold italic underline strikethrough | revisionhistory exportpdf exportword importword | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help",
 		contextmenu: "link image table preview",
 	  },
 	};
