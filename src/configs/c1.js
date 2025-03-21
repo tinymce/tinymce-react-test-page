@@ -220,8 +220,7 @@
         throw error;
       };
 
-      // Use microsoft's fetch-event-source library to work around the 2000 character limit
-      // of the browser `EventSource` API, which requires query strings
+      // It is imported in App.js
       // eslint-disable-next-line no-undef
       return fetchEventSource('https://openai-dev-proxy.tiny.work/v1/chat/completions', {
             ...openAiOptions,
@@ -230,12 +229,13 @@
             onmessage,
             onerror
           }).then(async (response) => {
-          if (response && !response.ok) {
-            const data = await response.json();
-            if (data.error) {
-              throw new Error(`${data.error.type}: ${data.error.message}`);
+            if (response && !response.ok) {
+              const data = await response.json();
+              if (data.error) {
+                throw new Error(`${data.error.type}: ${data.error.message}`);
+              }
             }
-          }}
+          }
       ).catch(onerror);
     });
   };

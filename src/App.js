@@ -1,6 +1,11 @@
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useState, useEffect } from 'react';
+// Use microsoft's fetch-event-source library to work around the 2000 character limit
+// of the browser `EventSource` API, which requires query strings
+// Expect source map warning/error due to https://github.com/Azure/fetch-event-source/issues/18
+import { fetchEventSource as fetchApi } from '@microsoft/fetch-event-source';
+
 import c1 from './configs/c1.js';
 import c2 from './configs/c2.js';
 import c3 from './configs/c3.js';
@@ -10,12 +15,17 @@ import c6 from './configs/c6.js';
 import basic from './snippets/basic.html';
 import s5 from './snippets/s5.html';
 import s6 from './snippets/s6.html';
-import { fetchEventSource as fetchApi} from '@microsoft/fetch-event-source';
 
 // Expose fetchEventSource to be use in config files (c1.js) which we treat as plain text to be eval'd later
 // and eval() which doesn't support `import`
 // eslint-disable-next-line no-unused-vars
 const fetchEventSource = fetchApi;
+
+// Trick webpack to not emit unused fetchEventSource
+// eslint-disable-next-line no-unused-vars
+const init = () => {
+  console.log(fetchEventSource);
+}
 
 const configWrapRe = /^\s*\(\s*function\s*\(\s*\)\s*\{\s*return\s*([\s\S]*);\s*\}\s*\)\s*\(\s*\)\s*;\s*$/;
 
