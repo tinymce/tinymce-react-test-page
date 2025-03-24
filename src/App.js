@@ -2,8 +2,9 @@ import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useState, useEffect } from 'react';
 // Use microsoft's fetch-event-source library to work around the 2000 character limit
-// of the browser `EventSource` API, which requires query strings
-// Expect source map warning/error due to https://github.com/Azure/fetch-event-source/issues/18
+// of the browser `EventSource` API, which requires query strings.
+// Expect source map warning/error https://github.com/Azure/fetch-event-source/issues/18.
+// Import fetchEventSource here to be use in config files (c1.js) because we treat it as plain text to be eval'd later and eval() doesn't support `import`
 import { fetchEventSource as fetchApi } from '@microsoft/fetch-event-source';
 
 import c1 from './configs/c1.js';
@@ -16,12 +17,9 @@ import basic from './snippets/basic.html';
 import s5 from './snippets/s5.html';
 import s6 from './snippets/s6.html';
 
-// Expose fetchEventSource to be use in config files (c1.js) which we treat as plain text to be eval'd later
-// and eval() which doesn't support `import`
+// Trick webpack to not emit unused fetchEventSource
 // eslint-disable-next-line no-unused-vars
 const fetchEventSource = fetchApi;
-
-// Trick webpack to not emit unused fetchEventSource
 // eslint-disable-next-line no-unused-vars
 const init = () => {
   console.log(fetchEventSource);
