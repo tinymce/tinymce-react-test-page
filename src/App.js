@@ -7,15 +7,18 @@ import { useState, useEffect } from 'react';
 // Import fetchEventSource here to be use in config files (c1.js) because we treat it as plain text to be eval'd later and eval() doesn't support `import`
 import { fetchEventSource as fetchApi } from '@microsoft/fetch-event-source';
 
-import c1 from './configs/c1.js';
-import c2 from './configs/c2.js';
-import c3 from './configs/c3.js';
-import c4 from './configs/c4.js';
-import c5 from './configs/c5.js';
-import c6 from './configs/c6.js';
+// import c1 from './configs/c1.js';
+// import c2 from './configs/c2.js';
+// import c3 from './configs/c3.js';
+// import c4 from './configs/c4.js';
+// import c5 from './configs/c5.js';
+// import c6 from './configs/c6.js';
+import c7 from './configs/c7.js';
+import c8 from './configs/c8.js';
+
 import basic from './snippets/basic.html';
 import s5 from './snippets/s5.html';
-import s6 from './snippets/s6.html';
+// import s6 from './snippets/s6.html';
 
 // Trick webpack to not emit unused fetchEventSource
 // eslint-disable-next-line no-unused-vars
@@ -25,7 +28,7 @@ const init = () => {
   console.log(fetchEventSource);
 }
 
-const configWrapRe = /^\s*\(\s*function\s*\(\s*\)\s*\{\s*return\s*([\s\S]*);\s*\}\s*\)\s*\(\s*\)\s*;\s*$/;
+// const configWrapRe = /^\s*\(\s*function\s*\(\s*\)\s*\{\s*return\s*([\s\S]*);\s*\}\s*\)\s*\(\s*\)\s*;\s*$/;
 
 /**
  * Escape text to make HTML.
@@ -41,10 +44,10 @@ const escapeHtml = (text) => {
  * @param {string} config a config with a function wrapping it to make it easy to eval.
  * @returns {string} the unwrapped config.
  */
-const unwrapConfig = (config) => {
-  const m = configWrapRe.exec(config);
-  return m !== null ? m[1] : config;
-}
+// const unwrapConfig = (config) => {
+//   const m = configWrapRe.exec(config);
+//   return m !== null ? m[1] : config;
+// }
 
 /**
  * Process a snippet and insert the contained variables.
@@ -53,12 +56,12 @@ const unwrapConfig = (config) => {
  * @param {string} config the config.
  * @returns {string} the snippet with variables inserted.
  */
-const replaceSnippetVars = (snippet, title, config) => {
+const replaceSnippetVars = (snippet, title) => {
   return snippet.replaceAll(/<!--\{([a-zA-Z0-9]+)\}-->/g, function (match, name) {
     if (name === 'title') {
       return escapeHtml(title);
     } else if (name === 'init') {
-      return `&lt;Editor init={${escapeHtml(unwrapConfig(config))}}\n/&gt;`;
+      return ``;
     } else {
       console.warn('Unknown variable', match);
       return match;
@@ -99,12 +102,16 @@ function App() {
       <p>View: <a href={baseUrl + "?cloud-channel=6-dev"}>6-dev</a>, <a href={baseUrl + "?cloud-channel=6-testing"}>6-testing</a>, <a href={baseUrl + "?cloud-channel=6-stable"}>6-stable</a></p>
       <p>View: <a href={baseUrl + "?cloud-channel=7-dev"}>7-dev</a>, <a href={baseUrl + "?cloud-channel=7-testing"}>7-testing</a>, <a href={baseUrl + "?cloud-channel=7-stable"}>7-stable</a></p>
       <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
-      <TinyEd config={c1} snippet={basic} title='Classic Editor' />
+      {/* <TinyEd config={c1} snippet={basic} title='Classic Editor' />
       <TinyEd config={c2} snippet={basic} title='Inline Editor' />
       <TinyEd config={c3} snippet={basic} title='Classic Editor - Quickbars on classic and mobile' />
       <TinyEd config={c4} snippet={basic} title='Classic Editor - with toolbar bottom , quick bars and no mobile setup' />
       <TinyEd config={c5} snippet={s5} title='Classic Editor - with random content and autoresize on' />
-      <TinyEd config={c6} snippet={s6} title='Place Holder Demo' />
+      <TinyEd config={c6} snippet={s6} title='Place Holder Demo' /> */}
+
+      <TinyEd config={c7} snippet={s5} title='Classic Editor - Flux'/>
+      <TinyEd config={c8} snippet={basic} title='Inline Editor - Flux' />
+
     </div>
   );
 }
