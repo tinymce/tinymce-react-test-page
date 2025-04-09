@@ -496,6 +496,7 @@
     tinycomments_author: 'qauser8@qa.com',
     tinycomments_author_name: 'SuperCoolQA',
     tinycomments_author_avatar: "https://upload.wikimedia.org/wikipedia/commons/6/6a/PNG_Test.png",
+    tinycomments_sidebar_show: true
     // tinycomments_author_avatar: "https://upload.wikimedia.org/wikipedia/commons/6/6a/PNG_Test.png",
     // tinycomments_can_resolve,
     // content_style: '.mce-show-annotations .mce-annotation { background: #df1313; } .mce-show-annotations .tc-active-annotation {background: #df1313; color: red; }',
