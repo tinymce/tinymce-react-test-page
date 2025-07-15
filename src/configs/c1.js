@@ -464,9 +464,9 @@
 		help_accessibility: true
 	};
 
-	const basicPlugin = "accordion ai advlist advtemplate autolink autocorrect mergetags footnotes lists link charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount typography inlinecss revisionhistory exportpdf exportword importword markdown uploadcare mentions";
+	const basicPlugin = "accordion ai advlist advtemplate autolink autocorrect mergetags footnotes lists link charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount typography inlinecss revisionhistory exportpdf exportword importword markdown uploadcare mentions suggestededits";
 
-	const basicToolbar = "uploadcare mentions aidialog aishortcuts accordion bold italic underline strikethrough casechange | revisionhistory exportpdf exportword importword | wordcount numlist bullist | h1 h2 h3 | table preview code codesample help";
+	const basicToolbar = "uploadcare mentions aidialog aishortcuts accordion bold italic underline strikethrough casechange | revisionhistory exportpdf exportword importword | wordcount numlist bullist | h1 h2 h3 | table preview code codesample suggestededits";
 
 	return {
 		basicConfig,
