@@ -9,16 +9,8 @@ import { fetchEventSource as fetchApi } from '@microsoft/fetch-event-source';
 
 import c1 from './configs/c1.js';
 import c2 from './configs/c2.js';
-import c3 from './configs/c3.js';
-import c4 from './configs/c4.js';
-import c5 from './configs/c5.js';
-import c6 from './configs/c6.js';
-import c7 from './configs/c7.js';
-import c8 from './configs/c8.js';
 
 import basic from './snippets/basic.html';
-import s5 from './snippets/s5.html';
-import s6 from './snippets/s6.html';
 
 // Trick webpack to not emit unused fetchEventSource
 const fetchEventSource = fetchApi;
@@ -72,7 +64,7 @@ const params = new URLSearchParams(window.location.search);
 
 const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.substring(0, window.location.href.indexOf('?')) : window.location.href;
 
-const cloudChannel = params.get("cloud-channel") ?? '7-dev';
+const cloudChannel = params.get("cloud-channel") ?? '8-dev';
 
 const apiKey = params.get("api-key") ?? 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ayxi5ao43ha';
 
@@ -104,14 +96,6 @@ function App() {
       <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
       <TinyEd config={c1} snippet={basic} title='Classic Editor' />
       <TinyEd config={c2} snippet={basic} title='Inline Editor' />
-      <TinyEd config={c3} snippet={basic} title='Classic Editor - Quickbars on classic and mobile' />
-      <TinyEd config={c4} snippet={basic} title='Classic Editor - with toolbar bottom , quick bars and no mobile setup' />
-      <TinyEd config={c5} snippet={s5} title='Classic Editor - with random content and autoresize on' />
-      <TinyEd config={c6} snippet={s6} title='Place Holder Demo' />
-
-      <TinyEd config={c7} snippet={s5} title='Classic Editor - Flux'/>
-      <TinyEd config={c8} snippet={basic} title='Inline Editor - Flux' />
-
     </div>
   );
 }
