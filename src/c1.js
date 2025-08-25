@@ -869,9 +869,6 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 
 	const basicConfig = {
 		height: 600,
-		autocorrect_autocorrect: true,
-		autocorrect_capitalize: true,
-		advcode_inline: true,
 		mobile: {
 			theme: "silver",
 			contextmenu: "link image table preview",
@@ -907,10 +904,10 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
       name: 'autolink',
       config: {}
     },
-    {
-      name: 'autoresize',
-      config: {}
-    },
+    // {
+    //   name: 'autoresize',
+    //   config: {}
+    // },
     {
       name: 'autosave',
       config: {}
@@ -1270,7 +1267,6 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
       config: {
         tinycomments_mode: 'callback',
         tinycomments_mentions_enabled: true,
-        sidebar_show: 'showcomments',
         tinycomments_create,
         tinycomments_reply,
         tinycomments_delete,
@@ -1308,12 +1304,13 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 
   
 
-  const generateConfig = ({ excludePlugins = [] }) => {
+  const generateConfig = ({ excludePlugins = [], overrides = {} }) => {
     const plugins = pluginsConfig.map((p) => p.name).filter((name) => !excludePlugins.includes(name));
-    const configs = pluginsConfig.reduce((acc, cur) => ({ ...acc, ...cur.config }), basicConfig);
+    const extractedPluginsConfig = pluginsConfig.reduce((acc, cur) => ({ ...acc, ...cur.config }), {});
+    const finalConfig = { ...basicConfig, ...extractedPluginsConfig, ...overrides };
 
     return {
-      ...configs,  
+      ...finalConfig,
       plugins: plugins,
       toolbar: basicToolbar,
       height: 500
