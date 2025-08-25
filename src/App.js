@@ -82,8 +82,10 @@ function App() {
       <p>View: <a href={baseUrl + "?cloud-channel=7-dev"}>7-dev</a>, <a href={baseUrl + "?cloud-channel=7-testing"}>7-testing</a>, <a href={baseUrl + "?cloud-channel=7-stable"}>7-stable</a></p>
       <p>View: <a href={baseUrl + "?cloud-channel=8-dev"}>8-dev</a>, <a href={baseUrl + "?cloud-channel=8-testing"}>8-testing</a>, <a href={baseUrl + "?cloud-channel=8-stable"}>8-stable</a></p>
       <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
-      <TinyEd config={ c1.generateConfig({ excludePlugins: ['tinydrive', 'uploadcare'] }) } snippet={basic} title='Classic Editor' />
-      {/* <TinyEd config={c2} snippet={basic} title='Inline Editor' /> */}
+      <TinyEd config={ c1.generateConfig({ selector: '', excludePlugins: ['tinydrive', 'uploadcare'] }) } snippet={basic} title='Classic Editor' />
+
+      <br/>
+      <TinyEd config={c1.generateConfig({ excludePlugins: ['tinydrive', 'editimage', 'image' ], overrides: { inline: true } })} snippet={basic} title='Inline Editor' />
     </div>
   );
 }
