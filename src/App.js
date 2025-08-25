@@ -1,23 +1,10 @@
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useState, useEffect } from 'react';
-// Use microsoft's fetch-event-source library to work around the 2000 character limit
-// of the browser `EventSource` API, which requires query strings.
-// Expect source map warning/error https://github.com/Azure/fetch-event-source/issues/18.
-// Import fetchEventSource here to be use in config files (c1.js) because we treat it as plain text to be eval'd later and eval() doesn't support `import`
-import { fetchEventSource as fetchApi } from '@microsoft/fetch-event-source';
 
-import c1 from './configs/c1.js';
-import c2 from './configs/c2.js';
+import c1 from './c1.js';
 
 import basic from './snippets/basic.html';
-
-// Trick webpack to not emit unused fetchEventSource
-const fetchEventSource = fetchApi;
-// eslint-disable-next-line no-unused-vars
-const init = () => {
-  console.log(fetchEventSource);
-}
 
 // const configWrapRe = /^\s*\(\s*function\s*\(\s*\)\s*\{\s*return\s*([\s\S]*);\s*\}\s*\)\s*\(\s*\)\s*;\s*$/;
 
@@ -71,8 +58,9 @@ const apiKey = params.get("api-key") ?? 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ay
 const TinyEd = ({ title, config, snippet, ...other }) => {
   const [init, setInit] = useState(null);
   const [initialValue, setInitialValue] = useState("");
+  console.log({config})
   useEffect(() => {
-    setInit(eval(config));
+    setInit(config);
     setInitialValue(replaceSnippetVars(snippet, title, config));
   }, [title, config, snippet]);
 
@@ -94,8 +82,8 @@ function App() {
       <p>View: <a href={baseUrl + "?cloud-channel=7-dev"}>7-dev</a>, <a href={baseUrl + "?cloud-channel=7-testing"}>7-testing</a>, <a href={baseUrl + "?cloud-channel=7-stable"}>7-stable</a></p>
       <p>View: <a href={baseUrl + "?cloud-channel=8-dev"}>8-dev</a>, <a href={baseUrl + "?cloud-channel=8-testing"}>8-testing</a>, <a href={baseUrl + "?cloud-channel=8-stable"}>8-stable</a></p>
       <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
-      <TinyEd config={c1} snippet={basic} title='Classic Editor' />
-      <TinyEd config={c2} snippet={basic} title='Inline Editor' />
+      <TinyEd config={ c1.generateConfig() } snippet={basic} title='Classic Editor' />
+      {/* <TinyEd config={c2} snippet={basic} title='Inline Editor' /> */}
     </div>
   );
 }

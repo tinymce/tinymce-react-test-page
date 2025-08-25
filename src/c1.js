@@ -1,5 +1,7 @@
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 
+  const API_URL = 'https://demouserdirectory.tiny.cloud/v1/users';
+
 	const advtemplate_templates = [
 		{
 			id: '1',
@@ -243,62 +245,59 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
   //   };
   // })();
   
-  // let usersRequest = null;
-  // let userRequest = {};
-  // const mentions_fetch = function (query, success) {
-  //     /* Fetch your full user list from somewhere */
-  //     if (usersRequest === null) {
-  //         usersRequest = fakeServer.fetchUsers();
-  //     }
-  //     usersRequest.then(function(users) {
-  //         /* query.term is the text the user typed after the '@' */
-  //         users = users.filter(function (user) {
-  //             return user.name.indexOf(query.term.toLowerCase()) !== -1;
-  //         });
-  //         users = users.slice(0, 10);
-  //         /* Where the user object must contain the properties `id` and `name`
-  //           but you could additionally include anything else you deem useful. */
-  //         success(users);
-  //     });
-  // };
-  // const mentions_menu_hover = function (userInfo, success) {
-  //     /* request more information about the user from the server and cache it locally */
-  //     if (!userRequest[userInfo.id]) {
-  //         userRequest[userInfo.id] = fakeServer.fetchUser(userInfo.id);
-  //     }
-  //     userRequest[userInfo.id].then(function(userDetail) {
-  //         const div = document.createElement('div');
+  const mentions_fetch = async (query, success) => {
+    const searchPhrase = query.term.toLowerCase();
+    await fetch(`${API_URL}?q=${encodeURIComponent(searchPhrase)}`)
+    .then((response) => response.json())
+    .then((users) => success(users.data.map((userInfo) => ({
+      id: userInfo.id,
+      name: userInfo.name,
+      image: userInfo.avatar,
+      description: userInfo.custom.role
+    }))))
+    .catch((error) => console.log(error));
+  };
 
-  //         div.innerHTML = (
-  //             '<div class="card">' +
-  //             '<img class="avatar" src="' + userDetail.image + '"/>' +
-  //             '<h1>' + userDetail.fullName + '</h1>' +
-  //             '<p>' + userDetail.description + '</p>' +
-  //             '</div>'
-  //         );
-  //         success(div);
-  //     });
-  // };
+  const createCard = (userInfo) => {
+    const div = document.createElement('div');
+    div.innerHTML = (
+      '<div class="card">' +
+        '<img class="avatar" src="' + userInfo.image + '">' +
+        '<h1>' + userInfo.name + '</h1>' +
+        '<p>' + userInfo.description + '</p>' +
+      '</div>'
+    );
+    return div;
+  };
 
-  // const mentions_menu_complete = function (editor, userInfo) {
-  //     const span = editor.getDoc().createElement('span');
-  //     span.className = 'mymention';
-  //     span.setAttribute('data-mention-id', userInfo.id);
-  //     span.appendChild(editor.getDoc().createTextNode('@' + userInfo.name));
-  //     return span;
-  // };
-  // const mentions_select = function (mention, success) {
-  //     /* `mention` is the element we previously created with `mentions_menu_complete`
-  //     in this case we have chosen to store the id as an attribute */
-  //     const id = mention.getAttribute('data-mention-id');
-  //     /* request more information about the user from the server and cache it locally */
-  //     if (!userRequest[id]) {
-  //         userRequest[id] = fakeServer.fetchUser(id);
-  //     }
-  //     userRequest[id].then(function(userDetail) {
-  //         success({ type: 'profile', user: userDetail });
-  //     });
-  // }
+  const mentions_menu_complete = (editor, userInfo) => {
+    const span = editor.getDoc().createElement('span');
+    span.className = 'mymention';
+    span.setAttribute('data-mention-id', userInfo.id);
+    span.appendChild(editor.getDoc().createTextNode('@' + userInfo.name));
+    return span;
+  };
+
+  const mentions_menu_hover = async (userInfo, success) => {
+    const card = createCard(userInfo);
+    success(card);
+  };
+
+  const mentions_select = async (mention, success) => {
+    const id = mention.getAttribute('data-mention-id');
+    await fetch(`${API_URL}/${id}`)
+      .then((response) => response.json())
+      .then((userInfo) => {
+        const card = createCard({
+          id: userInfo.id,
+          name: userInfo.name,
+          image: userInfo.avatar,
+          description: userInfo.custom.role
+        });
+        success(card);
+      })
+      .catch((error) => console.error(error));
+  };
 
 	const ai_request = (request, respondWith) => {
     respondWith.stream((signal, streamMessage) => {
@@ -422,33 +421,430 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
     });
   };
 
-	// const revisions = [
-	// 	{
-	// 		"revisionId": "1",
-	// 		"createdAt": "2023-11-25T03:30:46.171Z",
-	// 		"content": "<h2>Rev 1</h2>"
-	// 	},
-	// 	{
-	// 		"revisionId": "2",
-	// 		"createdAt": "2023-11-25T12:06:09.675Z",
-	// 		"content": "<h2>Rev 2</h2>"
-	// 	},
-	// 	{
-	// 		"revisionId": "3",
-	// 		"createdAt": "2023-11-27T03:23:32.351Z",
-	// 		"content": "<h2>Rev 3</h2>"
-	// 	},
-	// 	{
-	// 		"revisionId": "4",
-	// 		"createdAt": "2023-11-29T12:35:16.203Z",
-	// 		"content": "<h2>Rev 4</h2>"
-	// 	},
-	// 	{
-	// 		"revisionId": "5",
-	// 		"createdAt": "2023-11-28T08:01:56.100Z",
-	// 		"content": "<h2>Rev 5</h2>"
-	// 	}
-	// ];
+	const revisions = [
+		{
+			'revisionId': '1',
+			'createdAt': '2023-11-25T03:30:46.171Z',
+			'content': '<h2>Rev 1</h2>'
+		},
+		{
+			'revisionId': '2',
+			'createdAt': '2023-11-25T12:06:09.675Z',
+			'content': '<h2>Rev 2</h2>'
+		},
+		{
+			'revisionId': '3',
+			'createdAt': '2023-11-27T03:23:32.351Z',
+			'content': '<h2>Rev 3</h2>'
+		},
+		{
+			'revisionId': '4',
+			'createdAt': '2023-11-29T12:35:16.203Z',
+			'content': '<h2>Rev 4</h2>'
+		},
+		{
+			'revisionId': '5',
+			'createdAt': '2023-11-28T08:01:56.100Z',
+			'content': '<h2>Rev 5</h2>'
+		}
+	];
+
+  const suggestededitsModel = {
+    'history': {
+        '2': [
+            {
+                'id': 1,
+                'uid': 'james-wilson',
+                'timestamp': 1752576936000,
+                'feedback': 'Nice improvement!'
+            }
+        ]
+    },
+    'version': 1,
+    'contents': [
+        {
+            'type': 'p',
+            'children': [
+                {
+                    'type': 'img',
+                    'attrs': {
+                        'style': 'display: block; margin-left: auto; margin-right: auto;',
+                        'title': 'Tiny Logo',
+                        'src': 'https://www.tiny.cloud/docs/images/logos/android-chrome-256x256.png',
+                        'alt': 'TinyMCE Logo',
+                        'width': '128',
+                        'height': '128'
+                    }
+                }
+            ]
+        },
+        {
+            'type': 'h2',
+            'attrs': {
+                'style': 'text-align: center;'
+            },
+            'children': [
+                {
+                    'text': 'Welcome to the TinyMCE Suggested Edits '
+                },
+                {
+                    'text': 'interactive ',
+                    'opData': {
+                        'id': 1,
+                        'type': 'insert',
+                        'uid': 'alex-thompson',
+                        'timestamp': 1752015064000
+                    }
+                },
+                {
+                    'text': 'demo!'
+                }
+            ]
+        },
+        {
+            'type': 'p',
+            'attrs': {
+                'style': 'text-align: center;'
+            },
+            'children': [
+                {
+                    'text': 'Try out the Suggested Edits feature'
+                },
+                {
+                    'text': ': type in the editor, apply formatting or delete some content. T',
+                    'opData': {
+                        'id': 2,
+                        'type': 'insert',
+                        'uid': 'alex-thompson',
+                        'timestamp': 1752415064000
+                    }
+                },
+                {
+                    'text': ' by typing in the editor and t',
+                    'opData': {
+                        'id': 2,
+                        'type': 'remove',
+                        'uid': 'alex-thompson',
+                        'timestamp': 1752415064000
+                    }
+                },
+                {
+                    'text': 'hen'
+                },
+                {
+                    'text': ',',
+                    'opData': {
+                        'id': 3,
+                        'type': 'insert',
+                        'uid': 'alex-thompson',
+                        'timestamp': 1752515064000
+                    }
+                },
+                {
+                    'text': ' click'
+                },
+                {
+                    'text': 'ing',
+                    'opData': {
+                        'id': 4,
+                        'type': 'remove',
+                        'uid': 'alex-thompson',
+                        'timestamp': 1752515064000
+                    }
+                },
+                {
+                    'text': ' the Review Changes button in the toolbar'
+                },
+                {
+                    'text': ' to see your changes',
+                    'opData': {
+                        'id': 5,
+                        'type': 'insert',
+                        'uid': 'kai-nakamura',
+                        'timestamp': 1752615064000
+                    }
+                },
+                {
+                    'text': '.'
+                }
+            ]
+        },
+        {
+            'type': 'p',
+            'attrs': {
+                'style': 'text-align: center;'
+            },
+            'children': [
+                {
+                    'text': 'And visit the '
+                },
+                {
+                    'text': 'pricing page',
+                    'opData': {
+                        'id': 6,
+                        'type': 'modify',
+                        'uid': 'kai-nakamura',
+                        'timestamp': 1752615064000
+                    },
+                    'format': [
+                        {
+                            'type': 'a',
+                            'attrs': {
+                                'href': 'https://www.tiny.cloud/pricing'
+                            }
+                        }
+                    ],
+                    'oldFormat': [
+                        {
+                            'type': 'a',
+                            'attrs': {
+                                'href': 'https://www.tiny.cloud/pricing'
+                            }
+                        },
+                        'em'
+                    ]
+                },
+                {
+                    'text': ' to learn more about our Premium plugins.'
+                }
+            ]
+        },
+        {
+            'type': 'h2',
+            'children': [
+                {
+                    'text': 'A simple table to play with'
+                }
+            ]
+        },
+        {
+            'type': 'table',
+            'attrs': {
+                'style': 'border-collapse: collapse; width: 100%;',
+                'border': '1'
+            },
+            'children': [
+                {
+                    'type': 'thead',
+                    'children': [
+                        {
+                            'type': 'tr',
+                            'attrs': {
+                                'style': 'text-align: left;'
+                            },
+                            'children': [
+                                {
+                                    'type': 'th',
+                                    'children': [
+                                        {
+                                            'text': 'Product'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'type': 'th',
+                                    'children': [
+                                        {
+                                            'text': 'Cost'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'type': 'th',
+                                    'children': [
+                                        {
+                                            'text': 'Really?'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    'type': 'tbody',
+                    'children': [
+                        {
+                            'type': 'tr',
+                            'children': [
+                                {
+                                    'type': 'td',
+                                    'children': [
+                                        {
+                                            'text': 'TinyMCE Cloud'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'type': 'td',
+                                    'children': [
+                                        {
+                                            'text': 'Get started for free'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'type': 'td',
+                                    'children': [
+                                        {
+                                            'text': 'Yes!',
+                                            'format': [
+                                                'strong'
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            'type': 'tr',
+                            'children': [
+                                {
+                                    'type': 'td',
+                                    'children': [
+                                        {
+                                            'text': 'Plupload'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'type': 'td',
+                                    'children': [
+                                        {
+                                            'text': 'Free'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'type': 'td',
+                                    'children': [
+                                        {
+                                            'text': 'Yes!',
+                                            'format': [
+                                                'strong'
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            'type': 'h2',
+            'opData': {
+                'id': 7,
+                'type': 'insert',
+                'uid': 'mia-andersson',
+                'timestamp': 1752576331000
+            },
+            'children': [
+                {
+                    'text': 'Found a bug?'
+                }
+            ]
+        },
+        {
+            'type': 'p',
+            'children': [
+                {
+                    'text': ' ',
+                    'opData': {
+                        'id': 7,
+                        'type': 'remove',
+                        'uid': 'mia-andersson',
+                        'timestamp': 1752576331000
+                    }
+                },
+                {
+                    'text': 'If you believe you have found a bug please create an issue on the ',
+                    'opData': {
+                        'id': 7,
+                        'type': 'insert',
+                        'uid': 'mia-andersson',
+                        'timestamp': 1752576331000
+                    }
+                },
+                {
+                    'text': 'GitHub repo',
+                    'opData': {
+                        'id': 7,
+                        'type': 'insert',
+                        'uid': 'mia-andersson',
+                        'timestamp': 1752576331000
+                    },
+                    'format': [
+                        {
+                            'type': 'a',
+                            'attrs': {
+                                'href': 'https://github.com/tinymce/tinymce/issues'
+                            }
+                        }
+                    ]
+                },
+                {
+                    'text': ' to report it to the developers.',
+                    'opData': {
+                        'id': 7,
+                        'type': 'insert',
+                        'uid': 'mia-andersson',
+                        'timestamp': 1752576331000
+                    }
+                }
+            ]
+        },
+        {
+            'type': 'h2',
+            'children': [
+                {
+                    'text': 'Finally…'
+                }
+            ]
+        },
+        {
+            'type': 'p',
+            'children': [
+                {
+                    'text': 'Don’t forget to check out '
+                },
+                {
+                    'text': 'Plupload',
+                    'format': [
+                        {
+                            'type': 'a',
+                            'attrs': {
+                                'href': 'http://www.plupload.com',
+                                'target': '_blank',
+                                'rel': 'noopener'
+                            }
+                        }
+                    ]
+                },
+                {
+                    'text': ', the upload solution featuring HTML5 upload support.'
+                }
+            ]
+        },
+        {
+            'type': 'p',
+            'children': [
+                {
+                    'text': 'Thanks for supporting TinyMCE. We hope it helps you and your users create great content.'
+                }
+            ]
+        },
+        {
+            'type': 'p',
+            'children': [
+                {
+                    'text': 'All the best from the TinyMCE team.'
+                }
+            ]
+        }
+    ]
+};
 
 	const basicConfig = {
 		height: 600,
@@ -460,7 +856,14 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 			contextmenu: "link image table preview",
 		},
 		pad_empty_with_br: true,
-		help_accessibility: true
+		help_accessibility: true,
+    // TODO: Target for tinymce 8
+    user_id: 'kai-nakamura',
+    fetch_users: (userIds) =>
+      Promise.all(userIds.map((userId) => fetch(`${API_URL}/${userId}`)
+        .then((response) => response.json())
+        .catch(() => ({ id: userId })))),
+    
 	};
 
   const pluginsConfig = [
@@ -642,74 +1045,151 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
         ai_request
       },
     },
-    // {
-    //   name: 'autocorrect',
-    //   config: {},
-    // },
-    // {
-    //   name: 'casechange',
-    //   config: {},
-    // },
-    // {
-    //   name: 'checklist',
-    //   config: {},
-    // },
-    // {
-    //   name: 'editimage',
-    //   config: {},
-    // },
-    // {
-    //   name: 'export',
-    //   config: {},
-    // },
-    // {
-    //   name: 'exportpdf',
-    //   config: {},
-    // },
-    // {
-    //   name: 'exportword',
-    //   config: {},
-    // },
-    // {
-    //   name: 'footnotes',
-    //   config: {},
-    // },
-    // {
-    //   name: 'formatpainter',
-    //   config: {},
-    // },
-    // {
-    //   name: 'importword',
-    //   config: {},
-    // },
-    // {
-    //   name: 'inlinecss',
-    //   config: {},
-    // },
-    // {
-    //   name: 'licensekeymanager',
-    //   config: {},
-    // },
-    // {
-    //   name: 'linkchecker',
-    //   config: {},
-    // },
-    // {
-    //   name: 'markdown',
-    //   config: {},
-    // },
-    // {
-    //   name: 'math',
-    //   config: {},
-    // },
-    // {
-    //   name: 'mediaembed',
-    //   config: {},
-    // },
-    // {
-    //   name: 'mentions',
-    //   config: {},
-    // },
+    {
+      name: 'autocorrect',
+      config: {
+        autocorrect_autocorrect: true,
+        autocorrect_capitalize: true,
+      },
+    },
+    {
+      name: 'casechange',
+      config: {},
+    },
+    {
+      name: 'checklist',
+      config: {},
+    },
+    {
+      name: 'editimage',
+      config: {
+        editimage_toolbar: "rotateleft rotateright flipv fliph editimage imageoptions",
+        // TODO: re-check DOD
+        editimage_proxy_service_url: 'https://imageproxy.tiny.cloud',
+
+      },
+    },
+    {
+      name: 'exportpdf',
+      config: {
+        exportpdf_service_url: "https://exportpdf.converter.tiny.cloud",
+        exportpdf_converter_options: {
+        // HTML content to be used as the header in each page of the PDF
+        header_html: '<div style="text-align:center;">Document Title</div><div>Date: <span class="date"></span></div><div>Page <span class="pageNumber"></span> of <span class="totalPages"></span></div>',
+  
+        // HTML content to be used as the footer in each page of the PDF
+        footer_html: '<div style="text-align:right;">Confidential</div>',
+  
+        // CSS styles specifically for the header and footer
+        header_and_footer_css: 'div { color: blue; font-family: Arial, sans-serif; font-size: 10pt; }',
+  
+        margin_top: '2cm',
+        margin_bottom: '2cm',
+        margin_left: '20mm',
+        margin_right: '20mm',
+  
+        // 'Letter', 'Legal', 'Tabloid', 'Ledger', 'A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6'
+        format: 'A4',
+        // 'portrait' or 'landscape'
+        page_orientation: 'portrait',
+      },
+      exportpdf_converter_style: 'body { color: black !important; font-family: Helvetica, Arial, sans-serif; } p { color: cyan !important; }',
+      },
+    },
+    {
+      name: 'exportword',
+      config: {
+        exportword_service_url: "https://exportdocx.converter.tiny.cloud",
+        exportword_converter_options: {
+          // 'Letter', 'Legal', 'Tabloid', 'Statement', 'Executive', 'A3', 'A4', 'A5', 'A6', 'B4', 'B5'
+          format: 'A4',
+    
+          margin_top: '1in',
+          margin_bottom: '1in',
+          margin_right: '1in',
+          margin_left: '1in',
+          header: [
+            {
+              html: '<h1>First page header.</h1>', 
+              css: 'h1 { font-size: 30px; }',
+              
+              //'default', 'even', 'odd', 'first'
+              type: 'first'
+            }
+          ],
+    
+          footer: [
+            {
+              html: '<p>Page footer</p>',
+              css: 'p { font-size: 12px; }',
+              // 'default', 'even', 'odd', 'first'
+              type: 'default'
+            }
+          ],
+    
+          // 'portrait' or 'landscape'
+          orientation: 'portrait',
+          auto_pagination: true,
+    
+          base_url: 'https://example.com',
+          timezone: 'UTC'
+        },
+        exportword_converter_style: 'p { color: cyan !important }',
+      },
+    },
+    {
+      name: 'footnotes',
+      config: {},
+    },
+    {
+      name: 'formatpainter',
+      config: {},
+    },
+    {
+      name: 'importword',
+      config: {
+	      importword_service_url: "https://importdocx.converter.tiny.cloud",
+        importword_converter_options: {
+          formatting: {
+            styles: 'inline',
+            resets: 'inline',
+            defaults: 'inline',
+          }
+        }
+      }
+    },
+    {
+      name: 'inlinecss',
+      config: {},
+    },
+    {
+      name: 'linkchecker',
+      config: {},
+    },
+    {
+      name: 'markdown',
+      config: {},
+    },
+    {
+      name: 'math',
+      config: {},
+    },
+    {
+      name: 'mediaembed',
+      config: {},
+    },
+    {
+      name: 'mentions',
+      config: {
+        mentions_fetch,
+        mentions_menu_complete,
+        mentions_menu_hover,
+        mentions_select,
+        mentions_selector: '.mymention',
+        mentions_item_type: 'profile',
+        mentions_min_chars: 0,
+      },
+    },
     {
       name: 'mergetags',
       config: {
@@ -718,63 +1198,81 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 		    mergetags_list,
       },
     },
-    // {
-    //   name: 'onboarding',
-    //   config: {},
-    // },
-    // {
-    //   name: 'pageembed',
-    //   config: {},
-    // },
-    // {
-    //   name: 'permanentpen',
-    //   config: {},
-    // },
-    // {
-    //   name: 'powerpaste',
-    //   config: {},
-    // },
-    // {
-    //   name: 'revisionhistory',
-    //   config: {},
-    // },
-    // {
-    //   name: 'suggestededits',
-    //   config: {},
-    // },
-    // {
-    //   name: 'tableofcontents',
-    //   config: {},
-    // },
+    {
+      name: 'pageembed',
+      config: {},
+    },
+    {
+      name: 'permanentpen',
+      config: {
+        permanentpen_properties: {
+          fontname: 'impact,sans-serif',
+          forecolor: '#E74C3C',
+          fontsize: '12px',
+          bold: true,
+          italic: false,
+          strikethrough: false,
+          underline: false
+        },
+      },
+    },
+    {
+      name: 'powerpaste',
+      config: {},
+    },
+    // TODO: Validate content with data
+    {
+      name: 'revisionhistory',
+      config: {
+          revisionhistory_fetch: () => Promise.resolve(revisions),
+      },
+    },
+    // TODO: Validate content with model
+    {
+      name: 'suggestededits',
+      config: {
+        suggestededits_model: suggestededitsModel,
+        suggestededits_access: 'full',
+        suggestededits_content: 'html',
+      },
+    },
+    {
+      name: 'tableofcontents',
+      config: {},
+    },
     // {
     //   name: 'tinycomments',
     //   config: {},
     // },
+    // TODO: 
     // {
     //   name: 'tinydrive',
     //   config: {},
     // },
-    // {
-    //   name: 'tinymcespellchecker',
-    //   config: {},
-    // },
-    // {
-    //   name: 'typography',
-    //   config: {},
-    // },
+    {
+      name: 'tinymcespellchecker',
+      config: {},
+    },
+    {
+      name: 'typography',
+      config: {},
+    },
+    // TODO: Only for classic editor
     // {
     //   name: 'uploadcare',
-    //   config: {},
+    //   config: {
+    //     uploadcare_public_key: '6ff5776be9bb64e10023',
+    //   },
     // },
   ];
 
 
-	const basicToolbar = "bold italic underline strikethrough subscript superscript | math uploadcare | exportpdf exportword importword | aidialog aishortcuts | accordion addtemplate inserttemplate| fontfamily fontsize fontsizeinput | numlist bullist checklist mergetags footnotes footnotesupdate| typography permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 | wordcount searchreplace | undo redo | revisionhistory save cancel restoredraft | fullscreen print preview code help | insertdatetime codesample emoticons charmap | anchor link unlink image media pageembed insertfile | visualblocks visualchars | suggestedits";
+	const basicToolbar = "bold italic underline strikethrough subscript superscript | math uploadcare | exportpdf exportword importword | aidialog aishortcuts | accordion addtemplate inserttemplate| fontfamily fontsize fontsizeinput | numlist bullist checklist mergetags footnotes footnotesupdate| typography permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 | wordcount searchreplace | undo redo | revisionhistory save cancel restoredraft | fullscreen print preview code help | insertdatetime codesample emoticons charmap | anchor link unlink image media pageembed insertfile | visualblocks visualchars | suggestededits";
 
   
 
-  const generateConfig = () => {
-    const plugins = pluginsConfig.map((p) => p.name);
+  const generateConfig = ({ excludePlugins = [] }) => {
+    const plugins = pluginsConfig.map((p) => p.name).filter((name) => !excludePlugins.includes(name));
     const configs = pluginsConfig.reduce((acc, cur) => ({ ...acc, ...cur.config }), basicConfig);
 
     return {
@@ -787,21 +1285,4 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
   
 	export default {
     generateConfig
-    // generateConfig: (config) => ({
-    // ...configs,  
-		// plugins: plugins,
-		// toolbar: basicToolbar,
-		// // ai_request,
-		// // revisionhistory_fetch: () => Promise.resolve(revisions),
-		// // exportpdf_service_url: "https://exportpdf.converter.tiny.cloud/v1/convert",
-		// // exportword_service_url: "https://exportdocx.converter.tiny.cloud/v1/convert",
-		// // importword_service_url: "https://importdocx.converter.tiny.cloud/v2/convert/docx-html",
-    // // uploadcare_public_key: '6ff5776be9bb64e10023',
-    // // mentions_selector: '.mymention',
-    // // mentions_item_type: 'profile',
-    // // mentions_min_chars: 0,
-    // // mentions_fetch: mentions_fetch,
-    // // mentions_menu_hover: mentions_menu_hover,
-    // // mentions_menu_complete: mentions_menu_complete,
-    // // mentions_select: mentions_select,
 	};
