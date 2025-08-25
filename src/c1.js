@@ -119,132 +119,6 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 		}
 	];
 
-  // const userNames = [		//Fake users
-  //   'Terry Green', 'Edward Carroll', 'Virginia Turner', 'Alexander Schneider', 'Gary Vasquez', 'Randy Howell',
-  //   'Katherine Moore', 'Betty Washington', 'Grace Chapman', 'Christina Nguyen', 'Danielle Rose', 'Thomas Freeman',
-  //   'Thomas Armstrong', 'Vincent Lee', 'Brittany Kelley', 'Brenda Wheeler', 'Amy Price', 'Hannah Harvey',
-  //   'Bobby Howard', 'Frank Fox', 'Diane Hopkins', 'Johnny Hawkins', 'Sean Alexander', 'Emma Roberts', 'Thomas Snyder',
-  //   'Thomas Allen', 'Rebecca Ross', 'Amy Boyd', 'Kenneth Watkins', 'Sarah Tucker', 'Lawrence Burke', 'Emma Carr',
-  //   'Zachary Mason', 'John Scott', 'Michelle Davis', 'Nicholas Cole', 'Gerald Nelson', 'Emily Smith', 'Christian Stephens',
-  //   'Grace Carr', 'Arthur Watkins', 'Frances Baker', 'Katherine Cook', 'Roger Wallace', 'Pamela Arnold', 'Linda Barnes',
-  //   'Jacob Warren', 'Billy Ramirez', 'Pamela Walsh', 'Paul Wade', 'Katherine Campbell', 'Jeffrey Berry', 'Patrick Bowman',
-  //   'Dennis Alvarez', 'Crystal Lucas', 'Howard Mendoza', 'Patricia Wallace', 'Peter Stone', 'Tiffany Lane', 'Joe Perkins',
-  //   'Gloria Reynolds', 'Willie Fernandez', 'Doris Harper', 'Heather Sandoval', 'Danielle Franklin', 'Ann Ellis',
-  //   'Christopher Hernandez', 'Pamela Perry', 'Matthew Henderson', 'Jesse Mitchell', 'Olivia Reed', 'David Clark', 'Juan Taylor',
-  //   'Michael Garrett', 'Gerald Guerrero', 'Jerry Coleman', 'Joyce Vasquez', 'Jane Bryant', 'Sean West', 'Deborah Bradley',
-  //   'Phillip Castillo', 'Martha Coleman', 'Ryan Santos', 'Harold Hanson', 'Frances Hoffman', 'Heather Fisher', 'Martha Martin',
-  //   'George Gray', 'Rachel Herrera', 'Billy Hart', 'Kelly Campbell', 'Kelly Marshall', 'Doris Simmons', 'Julie George',
-  //   'Raymond Burke', 'Ruth Hart', 'Jack Schmidt', 'Billy Schmidt', 'Ruth Wagner', 'Zachary Estrada', 'Olivia Griffin', 'Ann Hayes',
-  //   'Julia Weaver', 'Anna Nelson', 'Willie Anderson', 'Anna Schneider', 'Debra Torres', 'Jordan Holmes', 'Thomas Dean',
-  //   'Maria Burton', 'Terry Long', 'Danielle McDonald', 'Kyle Flores', 'Cheryl Garcia', 'Judy Delgado', 'Karen Elliott',
-  //   'Vincent Ortiz', 'Ann Wright', 'Ann Ramos', 'Roy Jensen', 'Keith Cunningham', 'Mary Campbell', 'Jesse Ortiz', 'Joseph Mendoza',
-  //   'Nathan Bishop', 'Lori Valdez', 'Tammy Jacobs', 'Mary West', 'Juan Mitchell', 'Thomas Adams', 'Christian Martinez', 'James Ramos',
-  //   'Deborah Ross', 'Eric Holmes', 'Thomas Diaz', 'Sharon Morales', 'Kathryn Hamilton', 'Helen Edwards', 'Betty Powell',
-  //   'Harry Campbell', 'Raymond Perkins', 'Melissa Wallace', 'Danielle Hicks', 'Harold Brewer', 'Jack Burns', 'Anna Robinson',
-  //   'Dorothy Nguyen', 'Jane Dean', 'Janice Hunter', 'Ryan Moore', 'Brian Riley', 'Brittany Bradley', 'Phillip Ortega', 'William Fisher',
-  //   'Jennifer Schultz', 'Samantha Perez', 'Linda Carr', 'Ann Brown', 'Shirley Kim', 'Jeremy Alvarez', 'Dylan Oliver', 'Roy Gomez',
-  //   'Ethan Brewer', 'Ruth Lucas', 'Marilyn Myers', 'Danielle Wright', 'Jose Meyer', 'Bobby Brown', 'Angela Crawford', 'Brandon Willis',
-  //   'Kyle McDonald', 'Aaron Valdez', 'Kevin Webb', 'Ashley Gordon', 'Karen Jenkins', 'Johnny Santos', 'Ashley Henderson', 'Amy Walters',
-  //   'Amber Rodriguez', 'Thomas Ross', 'Dorothy Wells', 'Jennifer Murphy', 'Douglas Phillips', 'Helen Johnston', 'Nathan Hawkins',
-  //   'Roger Mitchell', 'Michael Young', 'Eugene Cruz', 'Kevin Snyder', 'Frank Ryan', 'Tiffany Peters', 'Beverly Garza', 'Maria Wright',
-  //   'Shirley Jensen', 'Carolyn Munoz', 'Kathleen Day', 'Ethan Meyer', 'Rachel Fields', 'Joan Bell', 'Ashley Sims', 'Sara Fields',
-  //   'Elizabeth Willis', 'Ralph Torres', 'Charles Lopez', 'Aaron Green', 'Arthur Hanson', 'Betty Snyder', 'Jose Romero', 'Linda Martinez',
-  //   'Zachary Tran', 'Sean Matthews', 'Eric Elliott', 'Kimberly Welch', 'Jason Bennett', 'Nicole Patel', 'Emily Guzman', 'Lori Snyder',
-  //   'Sandra White', 'Christina Lawson', 'Jacob Campbell', 'Ruth Foster', 'Mark McDonald', 'Carol Williams', 'Alice Washington',
-  //   'Brandon Ross', 'Judy Burns', 'Zachary Hawkins', 'Julie Chavez', 'Randy Duncan', 'Lisa Robinson', 'Jacqueline Reynolds', 'Paul Weaver',
-  //   'Edward Gilbert', 'Deborah Butler', 'Frances Fox', 'Joshua Schmidt', 'Ashley Oliver', 'Martha Chavez', 'Heather Hudson',
-  //   'Lauren Collins', 'Catherine Marshall', 'Katherine Wells', 'Robert Munoz', 'Pamela Nelson', 'Dylan Bowman', 'Virginia Snyder',
-  //   'Janet Ruiz', 'Ralph Burton', 'Jose Bryant', 'Russell Medina', 'Brittany Snyder', 'Richard Cruz', 'Matthew Jimenez', 'Danielle Graham',
-  //   'Steven Guerrero', 'Benjamin Matthews', 'Janet Mendoza', 'Harry Brewer', 'Scott Cooper', 'Alexander Keller', 'Virginia Gordon',
-  //   'Randy Scott', 'Kimberly Olson', 'Helen Lynch', 'Ronald Garcia', 'Joseph Willis', 'Philip Walker', 'Tiffany Harris', 'Brittany Weber',
-  //   'Gregory Harris', 'Sean Owens', 'Wayne Meyer', 'Roy McCoy', 'Keith Lucas', 'Christian Watkins', 'Christopher Porter', 'Sandra Lopez',
-  //   'Harry Ward', 'Julie Sims', 'Albert Keller', 'Lori Ortiz', 'Virginia Henry', 'Samuel Green', 'Judith Cole', 'Ethan Castillo', 'Angela Ellis',
-  //   'Amy Reid', 'Jason Brewer', 'Aaron Clark', 'Aaron Elliott', 'Doris Herrera', 'Howard Castro', 'Kenneth Davis', 'Austin Spencer',
-  //   'Jonathan Marshall', 'Phillip Nelson', 'Julia Guzman', 'Robert Hansen', 'Kevin Anderson', 'Gerald Arnold', 'Austin Castro', 'Zachary Moore',
-  //   'Joseph Cooper', 'Barbara Black', 'Albert Mendez', 'Marie Lane', 'Jacob Nichols', 'Virginia Marshall', 'Aaron Miller', 'Linda Harvey',
-  //   'Christopher Morris', 'Emma Fields', 'Scott Guzman', 'Olivia Alexander', 'Kelly Garrett', 'Jesse Hanson', 'Henry Wong', 'Billy Vasquez',
-  //   'Larry Ramirez', 'Bryan Brooks', 'Alan Berry', 'Nicole Powell', 'Stephen Bowman', 'Eric Hughes', 'Elizabeth Obrien', 'Timothy Ramos',
-  //   'Michelle Russell', 'Denise Ruiz', 'Sean Carter', 'Amanda Barnett', 'Kathy Black', 'Terry Gutierrez', 'John Jensen', 'Grace Sanchez',
-  //   'Tiffany Harvey', 'Jacqueline Sims', 'Wayne Lee', 'Roy Foster', 'Joyce Hart', 'Joseph Russell', 'Harold Washington', 'Beverly Cox',
-  //   'Nicole Morales', 'Anna Carpenter', 'Jesse Ray', 'Ann Snyder', 'Mark Diaz', 'Elizabeth Harper', 'Andrew Guerrero', 'Cheryl Silva',
-  //   'Michelle Hudson', 'Jeffrey Santos', 'Victoria Vasquez', 'Matthew Meyer', 'Jacob Murray', 'Jose Munoz', 'Edward Howell', 'Vincent Hunter',
-  //   'Daniel Walters', 'Samantha Obrien', 'Laura Elliott', 'Richard Olson', 'Daniel Graham', 'Carol Lee', 'Grace Sullivan', 'Nancy Rodriguez',
-  //   'Tyler Tran', 'Crystal Shaw', 'Madison Allen', 'Ralph Sims', 'Joe Jenkins', 'Dennis Ray', 'Arthur Davidson', 'Victoria Allen', 'Arthur Jackson',
-  //   'Joan Thomas', 'Daniel Hopkins', 'Gloria Hicks', 'Danielle Price', 'Craig Keller', 'Alan Morgan', 'Gregory Silva', 'Samantha Kelly',
-  //   'Rachel Williamson', 'Bruce Garrett', 'Jacob Smith', 'Kathleen Nichols', 'Sarah Long', 'Carol Pearson', 'Virginia Mendez', 'Judy Valdez',
-  //   'Jason Garza', 'Brenda Fowler', 'Karen Edwards', 'Alexander Anderson', 'Pamela Wallace', 'Ruth Howell', 'Walter Hernandez', 'George Lucas',
-  //   'Samantha Long', 'Margaret Garza', 'Kathleen Schultz', 'Frances Guerrero', 'Amber Meyer', 'Rachel Morales', 'Teresa Curtis', 'Heather Bell',
-  //   'Grace Johnson', 'Melissa King', 'Zachary Cook', 'Carol Schultz', 'Jane Beck', 'Karen Stone', 'Roger Brooks', 'Carolyn Fuller', 'Nicholas Coleman',
-  //   'William Bishop', 'Christine May', 'Linda George', 'Jean Meyer', 'Cheryl Armstrong', 'Danielle Welch', 'Amanda Graham', 'Janice Carter',
-  //   'Catherine Brooks', 'Lawrence Gonzalez', 'Amy Russell', 'Eugene Jimenez', 'Joseph Carlson', 'Peter McCoy', 'Jerry Washington', 'Carolyn Obrien',
-  //   'Mark Walker', 'Stephanie Hoffman', 'Julie Pena', 'Karen Curtis', 'Bryan Cruz', 'Madison Shaw', 'Rachel Graham', 'Susan Simpson', 'Andrea Harrison',
-  //   'Bryan Miller', 'Vincent McDonald', 'Jesse McCoy', 'Christine Ramos', 'Dorothy Riley', 'Karen Warren', 'Ashley Weber', 'Judith Robinson',
-  //   'Alan Mendez', 'Donna Medina', 'Helen Lane', 'Douglas Clark', 'Brenda Romero', 'Doris Wells', 'Patrick Howell', 'Doris Lawrence', 'Harry Jacobs',
-  //   'Phillip Rose', 'Deborah Patel', 'Bryan Day', 'Rachel Butler', 'Paul Butler', 'Judy Knight', 'Willie Wallace', 'Phillip Anderson', 'Emma Black',
-  //   'Lisa Lynch', 'Kimberly Freeman', 'Ronald West', 'Kathleen Harris', 'Martha Ruiz', 'Phillip Moreno', 'Robert Vargas', 'Jesse Diaz', 'Christine Weber',
-  //   'Karen Stanley', 'Theresa Edwards', 'Kathryn Chavez', 'Sarah Rios', 'Danielle Wong', 'Kathy Carr', 'Joan Diaz', 'Albert Walters',
-  //   'Denise Kim', 'Katherine Pearson', 'Diana Richardson', 'Harry Ford', 'Eric Mills', 'Sean Hicks', 'Joe Brown', 'Judith Morgan', 'Harry Hunter',
-  //   'Matthew Bryant', 'Tyler Rose', 'Mildred Delgado', 'Emma Peters', 'Walter Delgado', 'Lauren Gilbert', 'Christopher Romero'
-  // ];
-
-  // const fakeServer = (function () {
-  //   const descriptions = [	//user profile descriptions
-  //       'I like to work hard, play hard!',
-  //       'I drink like a fish, that is a fish that drinks coffee.',
-  //       'OutOfCheeseError: Please reinstall universe.',
-  //       'Do not quote me.',
-  //       'No one reads these things right?'
-  //   ];
-
-  //   const userDb = {};		//database of users
-  //   userNames.map(function (fullName) {
-  //       const name = fullName.toLowerCase().replace(/ /g, '');
-  //       const description = descriptions[Math.floor(descriptions.length * Math.random())];
-  //       const image = 'https://www.google.com/google.jpg';
-  //       return {
-  //           id: name,
-  //           name: name,
-  //           fullName: fullName,
-  //           description: description,
-  //           image: image
-  //       };
-  //   }).forEach(function(user) {
-  //       userDb[user.id] = user;
-  //   });
-
-  //   const fetchUsers = function() {		//fetch list of users with basic details
-  //       return new Promise(function(resolve) {
-  //           setTimeout(function() {
-  //               const users = Object.keys(userDb).map(function(id) {
-  //                   const user = userDb[id];
-  //                   return {
-  //                       id: id,
-  //                       name: user.name,
-  //                       image: user.image,
-  //                       description: user.description
-  //                   };
-  //               });
-  //               resolve(users);
-  //           }, 500);
-  //       });
-  //   };
-
-  //   const fetchUser = function(id) {	//fetch all details of single user
-  //       return new Promise(function(resolve, reject) {
-  //           setTimeout(function() {
-  //               if (Object.prototype.hasOwnProperty.call(userDb, id)) {
-  //                   resolve(userDb[id]);
-  //               }
-  //               reject('unknown user id "' + id + '"');
-  //           }, 300);
-  //       });
-  //   };
-  //   return {
-  //       fetchUsers: fetchUsers,
-  //       fetchUser: fetchUser
-  //   };
-  // })();
-  
   const mentions_fetch = async (query, success) => {
     const searchPhrase = query.term.toLowerCase();
     await fetch(`${API_URL}?q=${encodeURIComponent(searchPhrase)}`)
@@ -420,6 +294,153 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
       ).catch(onerror);
     });
   };
+
+  const user_id = 'james-wilson';
+  const collaborator_id = 'mia-andersson';
+
+  const tinycomments_create = (req, done, fail) => {
+    if (req.content === 'fail') {
+      fail(new Error('Something has gone wrong...'));
+    } else {
+      const uid = 'annotation-' + randomString();
+      conversationDb[uid] = {
+        uid,
+        comments: [{
+          uid,
+          author: user_id,
+          authorName: 'James Wilson',
+          authorAvatar: 'https://sneak-preview.tiny.cloud/demouserdirectory/images/employee_james-wilson_128_52f19412.jpg',
+          content: req.content,
+          createdAt: req.createdAt,
+          modifiedAt: req.createdAt
+        }]
+      };
+      setTimeout(() => done({ conversationUid: uid }), fakeDelay);
+    }
+  };
+
+  const fakeDelay = 200;
+
+  const randomString = () => {
+    return crypto.getRandomValues(new Uint32Array(1))[0].toString(36).substring(2, 14);
+  };
+
+
+  const conversationDb = {}
+
+  const tinycomments_reply = (req, done) => {
+    const replyUid = 'annotation-' + randomString();
+    conversationDb[req.conversationUid].comments.push({
+      uid: replyUid,
+      author: user_id,
+      authorName: 'James Wilson',
+      authorAvatar: 'https://sneak-preview.tiny.cloud/demouserdirectory/images/employee_james-wilson_128_52f19412.jpg',
+      content: req.content,
+      createdAt: req.createdAt,
+      modifiedAt: req.createdAt
+    });
+    setTimeout(() => done({ commentUid: replyUid }), fakeDelay);
+  };
+
+  const tinycomments_delete = (req, done) => {
+    if (user_id === collaborator_id) { // Replace wth your own logic, e.g. check if user created the conversation
+      delete conversationDb[req.conversationUid];
+      setTimeout(() => done({ canDelete: true }), fakeDelay);
+    } else {
+      setTimeout(() => done({ canDelete: false, reason: 'Must be admin user' }), fakeDelay);
+    }
+  };
+
+  const tinycomments_resolve = (req, done) => {
+    const conversation = conversationDb[req.conversationUid];
+    if (user_id === conversation.comments[0].author) { // Replace wth your own logic, e.g. check if user has admin priveleges
+      delete conversationDb[req.conversationUid];
+      setTimeout(() => done({ canResolve: true }), fakeDelay);
+    } else {
+      setTimeout(() => done({ canResolve: false, reason: 'Must be conversation author' }), fakeDelay);
+    }
+  };
+
+  const tinycomments_delete_comment = (req, done) => {
+    const oldcomments = conversationDb[req.conversationUid].comments;
+    let reason = 'Comment not found';
+
+    const newcomments = oldcomments.filter((comment) => {
+      if (comment.uid === req.commentUid) { // Found the comment to delete
+        if (user_id === comment.author) { // Replace with your own logic, e.g. check if user has admin privileges
+          return false; // Remove the comment
+        } else {
+          reason = 'Not authorised to delete this comment'; // Update reason
+        }
+      }
+      return true; // Keep the comment
+    });
+
+    if (newcomments.length === oldcomments.length) {
+      setTimeout(() => done({ canDelete: false, reason }), fakeDelay);
+    } else {
+      conversationDb[req.conversationUid].comments = newcomments;
+      setTimeout(() => done({ canDelete: true }), fakeDelay);
+    }
+  };
+
+  const tinycomments_edit_comment = (req, done) => {
+    const oldcomments = conversationDb[req.conversationUid].comments;
+    let reason = 'Comment not found';
+    let canEdit = false;
+
+    const newcomments = oldcomments.map((comment) => {
+      if (comment.uid === req.commentUid) { // Found the comment to delete
+        if (user_id === comment.author) { // Replace with your own logic, e.g. check if user has admin privileges
+          canEdit = true; // User can edit the comment
+          return { ...comment, content: req.content, modifiedAt: new Date().toISOString() }; // Update the comment
+        } else {
+          reason = 'Not authorised to edit this comment'; // Update reason
+        }
+      }
+      return comment; // Keep the comment
+    });
+
+    if (canEdit) {
+      conversationDb[req.conversationUid].comments = newcomments;
+      setTimeout(() => done({ canEdit }), fakeDelay);
+    } else {
+      setTimeout(() => done({ canEdit, reason }), fakeDelay);
+    }
+  };
+
+  const tinycomments_delete_all = (req, done) => {
+    const conversation = conversationDb[req.conversationUid];
+    if (user_id === conversation.comments[0].author) { // Replace wth your own logic, e.g. check if user has admin priveleges
+      delete conversationDb[req.conversationUid];
+      setTimeout(() => done({ canDelete: true }), fakeDelay);
+    } else {
+      setTimeout(() => done({ canDelete: false, reason: 'Must be conversation author' }), fakeDelay);
+    }
+  };
+
+  const tinycomments_lookup = (req, done) => {
+    setTimeout(() => {
+      done({
+        conversation: {
+          uid: conversationDb[req.conversationUid].uid,
+          comments: [...conversationDb[req.conversationUid].comments]
+        }
+      });
+    }, fakeDelay);
+  };
+
+  const tinycomments_fetch = (conversationUids, done) => {
+    const fetchedConversations = {};
+    conversationUids.forEach((uid) => {
+      const conversation = conversationDb[uid];
+      if (conversation) {
+        fetchedConversations[uid] = {...conversation};
+      }
+    });
+    setTimeout(() => done({ conversations: fetchedConversations }), fakeDelay);
+  };
+
 
 	const revisions = [
 		{
@@ -858,7 +879,7 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 		pad_empty_with_br: true,
 		help_accessibility: true,
     // TODO: Target for tinymce 8
-    user_id: 'kai-nakamura',
+    user_id,
     fetch_users: (userIds) =>
       Promise.all(userIds.map((userId) => fetch(`${API_URL}/${userId}`)
         .then((response) => response.json())
@@ -989,7 +1010,11 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
     },
     {
       name: 'quickbars',
-      config: {}
+      config: {
+        quickbars_image_toolbar: 'alignleft aligncenter alignright',    //This option allows you to specify or disable the image quickbars toolbar
+        quickbars_selection_toolbar: 'undo redo | copy cut paste | quicklink align',      //This option option configures the Quick Selection toolbar provided by the quickbars plugin.
+        quickbars_insert_toolbar: 'quickimage quicktable | hr pagebreak'  
+      }
     },
     {
       name: 'save',
@@ -1240,11 +1265,24 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
       name: 'tableofcontents',
       config: {},
     },
-    // {
-    //   name: 'tinycomments',
-    //   config: {},
-    // },
-    // TODO: 
+    {
+      name: 'tinycomments',
+      config: {
+        tinycomments_mode: 'callback',
+        tinycomments_mentions_enabled: true,
+        sidebar_show: 'showcomments',
+        tinycomments_create,
+        tinycomments_reply,
+        tinycomments_delete,
+        tinycomments_resolve,
+        tinycomments_delete_all,
+        tinycomments_lookup,
+        tinycomments_delete_comment,
+        tinycomments_edit_comment,
+        tinycomments_fetch,
+      },
+    },
+    // Intentionally excluded
     // {
     //   name: 'tinydrive',
     //   config: {},
@@ -1257,13 +1295,12 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
       name: 'typography',
       config: {},
     },
-    // TODO: Only for classic editor
-    // {
-    //   name: 'uploadcare',
-    //   config: {
-    //     uploadcare_public_key: '6ff5776be9bb64e10023',
-    //   },
-    // },
+    {
+      name: 'uploadcare',
+      config: {
+        uploadcare_public_key: '6ff5776be9bb64e10023',
+      },
+    },
   ];
 
 
@@ -1279,6 +1316,7 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
       ...configs,  
       plugins: plugins,
       toolbar: basicToolbar,
+      height: 500
     };
   }
 
