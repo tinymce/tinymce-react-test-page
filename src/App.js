@@ -58,7 +58,6 @@ const apiKey = params.get("api-key") ?? 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ay
 const TinyEd = ({ title, config, snippet, ...other }) => {
   const [init, setInit] = useState(null);
   const [initialValue, setInitialValue] = useState("");
-  console.log({config})
   useEffect(() => {
     setInit(config);
     setInitialValue(replaceSnippetVars(snippet, title, config));
@@ -68,8 +67,6 @@ const TinyEd = ({ title, config, snippet, ...other }) => {
     <div>
       <h1>{title}</h1>
       {init && <Editor apiKey={apiKey} cloudChannel={cloudChannel} init={init} initialValue={initialValue} {...other} />}
-      <br />
-      <br />
     </div>
   );
 };
@@ -81,7 +78,6 @@ function App() {
       <p>View: <a href={baseUrl + "?cloud-channel=6-dev"}>6-dev</a>, <a href={baseUrl + "?cloud-channel=6-testing"}>6-testing</a>, <a href={baseUrl + "?cloud-channel=6-stable"}>6-stable</a></p>
       <p>View: <a href={baseUrl + "?cloud-channel=7-dev"}>7-dev</a>, <a href={baseUrl + "?cloud-channel=7-testing"}>7-testing</a>, <a href={baseUrl + "?cloud-channel=7-stable"}>7-stable</a></p>
       <p>View: <a href={baseUrl + "?cloud-channel=8-dev"}>8-dev</a>, <a href={baseUrl + "?cloud-channel=8-testing"}>8-testing</a>, <a href={baseUrl + "?cloud-channel=8-stable"}>8-stable</a></p>
-      <p><label><input type="checkbox" id="streaming" /> Stream response</label></p>
       <TinyEd config={ c1.generateConfig({ excludePlugins: ['tinydrive', 'uploadcare'] }) } snippet={basic} title='Classic Editor' />
 
       <br/>
