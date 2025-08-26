@@ -1,4 +1,4 @@
-import { fetchEventSource } from '@microsoft/fetch-event-source';
+import { fetchEventSource } from '@sentool/fetch-event-source';
 
   const API_URL = 'https://demouserdirectory.tiny.cloud/v1/users';
 
@@ -274,22 +274,18 @@ import { fetchEventSource } from '@microsoft/fetch-event-source';
 
       const onerror = (error) => {
         // Stop operation and do not retry by the fetch-event-source
+        console.log('an error', { error })
+        console.trace();
         throw error;
       };
 
       return fetchEventSource('https://openai-dev-proxy.tiny.work/v1/chat/completions', {
             ...openAiOptions,
             openWhenHidden: true,
+            parseJson: false,
             onopen,
             onmessage,
-            onerror
-          }).then(async (response) => {
-            if (response && !response.ok) {
-              const data = await response.json();
-              if (data.error) {
-                throw new Error(`${data.error.type}: ${data.error.message}`);
-              }
-            }
+            onerror,
           }
       ).catch(onerror);
     });
