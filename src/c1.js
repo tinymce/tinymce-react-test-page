@@ -1,4 +1,4 @@
-import { fetchEventSource } from "@microsoft/fetch-event-source";
+import { fetchEventSource } from '@microsoft/fetch-event-source';
 
   const API_URL = 'https://demouserdirectory.tiny.cloud/v1/users';
 
@@ -904,6 +904,7 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
       name: 'autolink',
       config: {}
     },
+    // Intentional left out
     // {
     //   name: 'autoresize',
     //   config: {}
@@ -1276,7 +1277,19 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
         tinycomments_delete_comment,
         tinycomments_edit_comment,
         tinycomments_fetch,
-      },
+        // Fallback TinyMCE < 7.8
+        tinycomments_author: user_id,
+        tinycomments_author_name: 'James Wilson',
+        tinycomments_avatar: 'https://sneak-preview.tiny.cloud/demouserdirectory/images/employee_james-wilson_128_52f19412.jpg',
+        // Fallback for tinymce >= 7.8
+        tinycomments_fetch_author_info: (done) => {
+          setTimeout(() => done({
+            author: user_id,
+            authorName: 'James Wilson',
+            authorAvatar: 'https://sneak-preview.tiny.cloud/demouserdirectory/images/employee_james-wilson_128_52f19412.jpg',
+          }), fakeDelay);
+        },
+      }
     },
     // Intentionally excluded
     // {
