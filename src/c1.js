@@ -1,4 +1,5 @@
 import { fetchEventSource } from '@sentool/fetch-event-source';
+import TinymceaiConfig from './config/ai.js';
 
   const API_URL = 'https://demouserdirectory.tiny.cloud/v1/users';
 
@@ -1306,22 +1307,29 @@ import { fetchEventSource } from '@sentool/fetch-event-source';
         uploadcare_public_key: '6ff5776be9bb64e10023',
       },
     },
+    {
+      ...TinymceaiConfig,
+    }
   ];
 
 
 	const basicToolbar = "bold italic underline strikethrough subscript superscript | math uploadcare | exportpdf exportword importword | aidialog aishortcuts | accordion addtemplate inserttemplate| fontfamily fontsize fontsizeinput | numlist bullist checklist mergetags footnotes footnotesupdate| typography permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 | wordcount searchreplace | undo redo | revisionhistory save cancel restoredraft | fullscreen print preview code help | insertdatetime codesample emoticons charmap | anchor link unlink image media pageembed insertfile | visualblocks visualchars | suggestededits";
 
-  
+  const finalToolbarConfig = basicToolbar + ' | ' + pluginsConfig.map((plugin) => plugin?.toolbar).filter(Boolean).join(' | ');
 
   const generateConfig = ({ excludePlugins = [], overrides = {} }) => {
     const plugins = pluginsConfig.map((p) => p.name).filter((name) => !excludePlugins.includes(name));
     const extractedPluginsConfig = pluginsConfig.reduce((acc, cur) => ({ ...acc, ...cur.config }), {});
-    const finalConfig = { ...basicConfig, ...extractedPluginsConfig, ...overrides };
+    const finalConfig = {
+      ...basicConfig,
+      ...extractedPluginsConfig,
+      ...overrides
+    };
 
     return {
       ...finalConfig,
       plugins: plugins,
-      toolbar: basicToolbar,
+      toolbar: finalToolbarConfig,
       height: 500
     };
   }
