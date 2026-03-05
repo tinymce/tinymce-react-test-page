@@ -1,4 +1,5 @@
 export default {
   name: 'a11ychecker',
-  config: {}
+  config: {},
+  toolbar: 'a11ycheck'
 };

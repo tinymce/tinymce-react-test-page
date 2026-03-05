@@ -1,5 +1,6 @@
 export default {
   name: 'permanentpen',
+  toolbar: 'permanentpen',
   config: {
     permanentpen_properties: {
       fontname: 'impact,sans-serif',

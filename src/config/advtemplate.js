@@ -66,6 +66,7 @@ const advtemplate_templates = [
 	];
 
 export default {
+  toolbar: 'addtemplate inserttemplate',
     name: 'advtemplate',
     config: {
       advtemplate_templates

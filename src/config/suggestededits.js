@@ -396,6 +396,7 @@ const suggestededitsModel = {
 };
 
 export default {
+  toolbar: 'suggestededits',
   name: 'suggestededits',
   config: {
     suggestededits_model: suggestededitsModel,

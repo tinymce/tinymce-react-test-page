@@ -49,6 +49,7 @@ const mergetags_list = [
 	];
 
   export default {
+  toolbar: 'mergetags',
     name: 'mergetags',
     config: {
       mergetags_prefix: '${',

@@ -27,6 +27,7 @@ const revisions = [
 ];
 
 export default {
+  toolbar: 'revisionhistory',
   name: 'revisionhistory',
   config: {
     revisionhistory_fetch: () => Promise.resolve(revisions),

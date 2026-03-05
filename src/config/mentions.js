@@ -55,6 +55,7 @@ const mentions_select = async (mention, success) => {
 };
 
 export default {
+  toolbar: 'mentions',
   name: 'mentions',
   config: {
     mentions_fetch,

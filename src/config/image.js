@@ -1,5 +1,6 @@
 export default {
   name: 'image',
+  toolbar: 'image',
   config: {
     image_advtab: true,
     image_description: true,

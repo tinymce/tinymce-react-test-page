@@ -1,4 +1,5 @@
 export default {
+  toolbar: 'exportword',
   name: 'exportword',
   config: {
     exportword_service_url: "https://exportdocx.converter.tiny.cloud",

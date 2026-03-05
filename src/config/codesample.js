@@ -1,5 +1,6 @@
 export default {
   name: 'codesample',
+  toolbar: 'codesample',
   config: {
     codesample_languages: [
       { text: 'HTML/XML', value: 'markup' },

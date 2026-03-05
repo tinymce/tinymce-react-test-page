@@ -145,6 +145,7 @@ const tinycomments_fetch = (conversationUids, done) => {
 };
 
 export default {
+  toolbar: 'comments',
     name: 'tinycomments',
     config: {
       tinycomments_mode: 'callback',

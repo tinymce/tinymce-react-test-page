@@ -1,5 +1,6 @@
 export default {
   name: 'exportpdf',
+  toolbar: 'exportpdf',
   config: {
     exportpdf_service_url: "https://exportpdf.converter.tiny.cloud",
     exportpdf_converter_options: {

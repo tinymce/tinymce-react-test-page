@@ -1,5 +1,6 @@
 export default {
   name: 'insertdatetime',
+  toolbar: 'insertdatetime',
   config: {
     // override the default formatting rule for date formats inserted by the mceInsertDate command
     insertdatetime_dateformat: "%Y/%m/%d",

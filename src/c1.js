@@ -61,9 +61,9 @@ import TypographyConfig from './config/typography';
 import UploadcareConfig from './config/uploadcare';
 
 
-  const API_URL = 'https://demouserdirectory.tiny.cloud/v1/users';
+const API_URL = 'https://demouserdirectory.tiny.cloud/v1/users';
 
-  const user_id = 'james-wilson';
+const user_id = 'james-wilson';
 const basicConfig = {
   height: 600,
   mobile: {
@@ -81,93 +81,88 @@ const basicConfig = {
   
 };
 
-  const pluginsConfig = [
-    AccordionConfig,
-    CodeSampleConfig,
-    AdvlistConfig,
-    AnchorConfig,
-    AutolinkConfig,
-    AutosaveConfig,
-    CharmapConfig,
-    CodeConfig,
-    EditimageConfig,
-    DirectionalityConfig,
-    EmoticonsConfig,
-    FullscreenConfig,
-    HelpConfig,
-    ImageConfig,
-    ImportcssConfig,
-    InsertDatetimeConfig,
-    LinkConfig,
-    ListsConfig,
-    MediaConfig,
-    NonbreakingConfig,
-    PagebreakConfig,
-    PreviewConfig,
-    QuickbarsConfig,
-    SaveConfig,
-    SearchreplaceConfig,
-    TableConfig,
-    VisualblocksConfig,
-    VisualcharsConfig,
-    WordcountConfig,
-    A11ycheckerConfig,
-    AdvcodeConfig,
-    AdvtableConfig,
-    AdvtemplateConfig,
-    AiConfigPlugin,
-    AutocorrectConfig,
-    CasechangeConfig,
-    ChecklistConfig,
-    EditimageConfig2,
-    ExportpdfConfig,
-    ExportWordConfig,
-    FootnotesConfig,
-    FormatpainterConfig,
-    ImportwordConfig,
-    InlinecssConfig,
-    LinkcheckerConfig,
-    MarkdownConfig,
-    MathConfig,
-    MediaembedConfig,
-    MentionsConfig,
-    MergetagsConfig,
-    PageembedConfig,
-    PermanentpenConfig,
-    PowerpasteConfig,
-    RevisionhistoryConfig,
-    SuggestedEditConfig,
-    TableofcontentsConfig,
-    TinyCommentsConfig,
-    TinymcespellcheckerConfig,
-    TypographyConfig,
-    UploadcareConfig,
-    TinymceaiConfig,
-  ];
+const pluginsConfig = [
+  AccordionConfig,
+  CodeSampleConfig,
+  AdvlistConfig,
+  AnchorConfig,
+  AutolinkConfig,
+  AutosaveConfig,
+  CharmapConfig,
+  CodeConfig,
+  EditimageConfig,
+  DirectionalityConfig,
+  EmoticonsConfig,
+  FullscreenConfig,
+  HelpConfig,
+  ImageConfig,
+  ImportcssConfig,
+  InsertDatetimeConfig,
+  LinkConfig,
+  ListsConfig,
+  MediaConfig,
+  NonbreakingConfig,
+  PagebreakConfig,
+  PreviewConfig,
+  QuickbarsConfig,
+  SaveConfig,
+  SearchreplaceConfig,
+  TableConfig,
+  VisualblocksConfig,
+  VisualcharsConfig,
+  WordcountConfig,
+  A11ycheckerConfig,
+  AdvcodeConfig,
+  AdvtableConfig,
+  AdvtemplateConfig,
+  AiConfigPlugin,
+  AutocorrectConfig,
+  CasechangeConfig,
+  ChecklistConfig,
+  EditimageConfig2,
+  ExportpdfConfig,
+  ExportWordConfig,
+  FootnotesConfig,
+  FormatpainterConfig,
+  ImportwordConfig,
+  InlinecssConfig,
+  LinkcheckerConfig,
+  MarkdownConfig,
+  MathConfig,
+  MediaembedConfig,
+  MentionsConfig,
+  MergetagsConfig,
+  PageembedConfig,
+  PermanentpenConfig,
+  PowerpasteConfig,
+  RevisionhistoryConfig,
+  SuggestedEditConfig,
+  TableofcontentsConfig,
+  TinyCommentsConfig,
+  TinymcespellcheckerConfig,
+  TypographyConfig,
+  UploadcareConfig,
+  TinymceaiConfig,
+];
+const toolbarConfig = pluginsConfig.map((plugin) => plugin?.toolbar).filter(Boolean).join(' | ');
+const generateConfig = ({ excludePlugins = [], overrides = {} }) => {
+  const plugins = pluginsConfig.map((p) => p.name).filter((name) => !excludePlugins.includes(name));
+  const extractedPluginsConfig = pluginsConfig.reduce((acc, cur) => ({ ...acc, ...cur.config }), {});
+  const finalConfig = {
+    ...basicConfig,
+    ...extractedPluginsConfig,
+    ...overrides
+  };
+
+  return {
+    ...finalConfig,
+    plugins: plugins,
+    toolbar: toolbarConfig,
+    height: 500
+  };
+}
 
 
-	const basicToolbar = "bold italic underline strikethrough subscript superscript | math uploadcare | exportpdf exportword importword | aidialog aishortcuts | accordion addtemplate inserttemplate| fontfamily fontsize fontsizeinput | numlist bullist checklist mergetags footnotes footnotesupdate| typography permanentpen formatpainter removeformat forecolor backcolor | blockquote nonbreaking hr pagebreak | casechange styles blocks lineheight | ltr rtl outdent indent | align alignleft aligncenter alignright alignjustify alignnone | h1 h2 h3 h4 h5 h6 h7 | wordcount searchreplace | undo redo | revisionhistory save cancel restoredraft | fullscreen print preview code help | insertdatetime codesample emoticons charmap | anchor link unlink image media pageembed insertfile | visualblocks visualchars | suggestededits";
-
-  const finalToolbarConfig = basicToolbar + ' | ' + pluginsConfig.map((plugin) => plugin?.toolbar).filter(Boolean).join(' | ');
-
-  const generateConfig = ({ excludePlugins = [], overrides = {} }) => {
-    const plugins = pluginsConfig.map((p) => p.name).filter((name) => !excludePlugins.includes(name));
-    const extractedPluginsConfig = pluginsConfig.reduce((acc, cur) => ({ ...acc, ...cur.config }), {});
-    const finalConfig = {
-      ...basicConfig,
-      ...extractedPluginsConfig,
-      ...overrides
-    };
-
-    return {
-      ...finalConfig,
-      plugins: plugins,
-      toolbar: finalToolbarConfig,
-      height: 500
-    };
-  }
-
-  
-	export default {
-    generateConfig
-	};
+export default {
+  generateConfig
+};
