@@ -142,8 +142,11 @@ const pluginsConfig = [
   UploadcareConfig,
   TinymceaiConfig,
 ];
+
+
+console.log('tinymce ai config ', TinymceaiConfig);
 const toolbarConfig = pluginsConfig.map((plugin) => plugin?.toolbar).filter(Boolean).join(' | ');
-const generateConfig = ({ excludePlugins = [], overrides = {} }) => {
+const generateConfig = ({ excludePlugins = [], overrideConfig = {} }) => {
   const plugins = pluginsConfig.map((p) => p.name).filter((name) => !excludePlugins.includes(name));
   const extractedPluginsConfig = pluginsConfig.reduce((acc, cur) => {
     return { ...acc, ...cur.config };
@@ -151,7 +154,7 @@ const generateConfig = ({ excludePlugins = [], overrides = {} }) => {
   const finalConfig = {
     ...basicConfig,
     ...extractedPluginsConfig,
-    ...overrides
+    ...overrideConfig
   };
 
   return {

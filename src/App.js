@@ -66,7 +66,7 @@ const TinyEd = ({ title, config, snippet, ...other }) => {
   return (
     <div>
       <h1>{title}</h1>
-      {init && <Editor apiKey={apiKey} cloudChannel={cloudChannel} init={init} initialValue={initialValue} {...other} tinymceScriptSrc='https://cdn.staging.tiny.cloud/1/451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu/tinymce/8-dev/tinymce.min.js'/>}
+      {init && <Editor apiKey={apiKey} cloudChannel={cloudChannel} init={init} initialValue={initialValue} {...other} tinymceScriptSrc='https://cdn.staging.tiny.cloud/1/451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu/tinymce/8-testing/tinymce.min.js'/>}
     </div>
   );
 };
@@ -81,7 +81,7 @@ function App() {
       <TinyEd config={ c1.generateConfig({ excludePlugins: ['tinydrive', 'uploadcare'] }) } snippet={basic} title='Classic Editor' />
 
       <br/>
-      <TinyEd config={c1.generateConfig({ excludePlugins: ['tinydrive', 'editimage', 'image' ], overrides: { inline: true } })} snippet={basic} title='Inline Editor' />
+      <TinyEd config={c1.generateConfig({ excludePlugins: ['tinydrive', 'editimage', 'image' ], overrideConfig: { inline: true } })} snippet={basic} title='Inline Editor' />
     </div>
   );
 }
