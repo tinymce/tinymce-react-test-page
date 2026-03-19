@@ -53,7 +53,7 @@ const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.sub
 
 const cloudChannel = params.get("cloud-channel") ?? '8-dev';
 
-const apiKey = params.get("api-key") ?? 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ayxi5ao43ha';
+const apiKey = params.get("api-key") ?? '451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu';
 
 const TinyEd = ({ title, config, snippet, ...other }) => {
   const [init, setInit] = useState(null);
@@ -66,7 +66,7 @@ const TinyEd = ({ title, config, snippet, ...other }) => {
   return (
     <div>
       <h1>{title}</h1>
-      {init && <Editor apiKey={apiKey} cloudChannel={cloudChannel} init={init} initialValue={initialValue} {...other} />}
+      {init && <Editor apiKey={apiKey} cloudChannel={cloudChannel} init={init} initialValue={initialValue} {...other} tinymceScriptSrc='https://cdn.staging.tiny.cloud/1/451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu/tinymce/8-dev/tinymce.min.js'/>}
     </div>
   );
 };

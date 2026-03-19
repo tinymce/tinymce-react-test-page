@@ -1,7 +1,6 @@
 import TinymceaiConfig from './config/tinymceai';
 import AdvtemplateConfig from './config/advtemplate';
 import AccordionConfig from './config/accordion';
-import AiConfigPlugin from './config/ai';
 import MergetagsConfig from './config/mergetags';
 import MentionsConfig from './config/mentions';
 import TinyCommentsConfig from './config/tinycomments';
@@ -115,7 +114,6 @@ const pluginsConfig = [
   AdvcodeConfig,
   AdvtableConfig,
   AdvtemplateConfig,
-  AiConfigPlugin,
   AutocorrectConfig,
   CasechangeConfig,
   ChecklistConfig,
@@ -147,7 +145,9 @@ const pluginsConfig = [
 const toolbarConfig = pluginsConfig.map((plugin) => plugin?.toolbar).filter(Boolean).join(' | ');
 const generateConfig = ({ excludePlugins = [], overrides = {} }) => {
   const plugins = pluginsConfig.map((p) => p.name).filter((name) => !excludePlugins.includes(name));
-  const extractedPluginsConfig = pluginsConfig.reduce((acc, cur) => ({ ...acc, ...cur.config }), {});
+  const extractedPluginsConfig = pluginsConfig.reduce((acc, cur) => {
+    return { ...acc, ...cur.config };
+  }, {});
   const finalConfig = {
     ...basicConfig,
     ...extractedPluginsConfig,
