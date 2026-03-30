@@ -2,7 +2,7 @@ import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useState, useEffect } from 'react';
 
-import c1 from './c1';
+import { generateConfig } from './config/config';
 
 import basic from './snippets/basic.html';
 
@@ -48,12 +48,17 @@ const replaceSnippetVars = (snippet, title) => {
 };
 
 const params = new URLSearchParams(window.location.search);
+const configParams = {
+  jwtServerURL: 'https://demo.api.tiny.cloud',
+  apiKey: 'prsghhxax677rv082a1zj9b7cgjuoaqysf7h8ayxi5ao43ha'
+};
 
 const baseUrl = window.location.href.indexOf('?') > 0 ? window.location.href.substring(0, window.location.href.indexOf('?')) : window.location.href;
 
 const cloudChannel = params.get("cloud-channel") ?? '8-dev';
 
-const apiKey = params.get("api-key") ?? '451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu';
+const apiKey = params.get("api-key") ?? configParams.apiKey;
+
 
 const TinyEd = ({ title, config, snippet, ...other }) => {
   const [init, setInit] = useState(null);
@@ -66,7 +71,7 @@ const TinyEd = ({ title, config, snippet, ...other }) => {
   return (
     <div>
       <h1>{title}</h1>
-      {init && <Editor apiKey={apiKey} cloudChannel={cloudChannel} init={init} initialValue={initialValue} {...other} tinymceScriptSrc='https://cdn.staging.tiny.cloud/1/451hc4rk1hb0l77jr4loyiutfx7k9fs0decaxvfma65mwulu/tinymce/8-testing/tinymce.min.js'/>}
+      {init && <Editor apiKey={apiKey} cloudChannel={cloudChannel} init={init} initialValue={initialValue} {...other}/>}
     </div>
   );
 };
@@ -78,10 +83,10 @@ function App() {
       <p>View: <a href={baseUrl + "?cloud-channel=6-dev"}>6-dev</a>, <a href={baseUrl + "?cloud-channel=6-testing"}>6-testing</a>, <a href={baseUrl + "?cloud-channel=6-stable"}>6-stable</a></p>
       <p>View: <a href={baseUrl + "?cloud-channel=7-dev"}>7-dev</a>, <a href={baseUrl + "?cloud-channel=7-testing"}>7-testing</a>, <a href={baseUrl + "?cloud-channel=7-stable"}>7-stable</a></p>
       <p>View: <a href={baseUrl + "?cloud-channel=8-dev"}>8-dev</a>, <a href={baseUrl + "?cloud-channel=8-testing"}>8-testing</a>, <a href={baseUrl + "?cloud-channel=8-stable"}>8-stable</a></p>
-      <TinyEd config={ c1.generateConfig({ excludePlugins: ['tinydrive', 'uploadcare'] }) } snippet={basic} title='Classic Editor' />
+      <TinyEd config={ generateConfig(configParams, { excludePlugins: ['tinydrive', 'uploadcare'] }) } snippet={basic} title='Classic Editor' />
 
       <br/>
-      <TinyEd config={c1.generateConfig({ excludePlugins: ['tinydrive', 'editimage', 'image' ], overrideConfig: { inline: true } })} snippet={basic} title='Inline Editor' />
+      <TinyEd config={ generateConfig(configParams, { excludePlugins: ['tinydrive', 'editimage', 'image' ], overrideConfig: { inline: true } })} snippet={basic} title='Inline Editor' />
     </div>
   );
 }

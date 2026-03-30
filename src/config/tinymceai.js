@@ -1,19 +1,20 @@
-const JWT_SERVER_URL = 'https://tinymce-ai-jwt.onrender.com';
-
-export default {
+export default (params) => ({
   config: {
     // tinymceai_api_url: 'https://tinymceai.api.staging.tiny.cloud/',
 
     // REQUIRED: tinymceai_service_url — Base URL of the AI backend service
     // tinymceai_service_url: 'https://tinymceai.api.staging.tiny.cloud/',
-    // tinymceai_service_url: 'https://tinymceai.api.dev.tiny.cloud/',
-     tinymceai_token_provider: () => {
-      return fetch(`${JWT_SERVER_URL}/jwt`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      }).then(r => r.json());
-    },
+    tinymceai_service_url: 'https://tinymceai.api.tiny.cloud/',
+    tinymceai_token_provider: async () => {
+      // Create a session and fetch a random user
+      await fetch(`${params.jwtServerURL}/1/${params.apiKey}/auth/random`, { method: "POST", credentials: "include" });
 
+      const response = await fetch(`${params.jwtServerURL}/1/${params.apiKey}/jwt/tinymceai`, {
+        credentials: 'include'
+      });
+      const token = await response.text();
+      return { token };
+    },
 
     // content_id — Groups conversations by document
     content_id: 'render_doc_1',
@@ -140,5 +141,5 @@ export default {
     },
   },
   toolbar: 'tinymceai-chat tinymceai-review tinymceai-quickactions',
-  name: 'tinymceai',
-}
+  name: 'tinymceai'
+});
